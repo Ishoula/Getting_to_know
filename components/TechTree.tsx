@@ -110,7 +110,7 @@ export default function TechTree() {
               mouse={mouse}
               size={
                 tech.level === 0
-                  ? { width: 2.4, height: 0.9, depth: 0.18, fontSize: 0.22 }
+                  ? { width: 2.8, height: 0.7, depth: 0.18, fontSize: 0.22 }
                   : undefined
               }
             />

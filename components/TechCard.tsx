@@ -2,14 +2,13 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Text, MeshDistortMaterial, RoundedBox } from "@react-three/drei";
+import { Text, RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
 
 interface TechCardProps {
   label: string;
   basePosition: [number, number, number];
   isActive: boolean;
-
   setHoveredTech: (val: string | null) => void;
   size?: {
     width: number;
@@ -23,53 +22,30 @@ export default function TechCard({
   label,
   basePosition,
   isActive,
-  
   setHoveredTech,
   size,
 }: TechCardProps) {
   const meshRef = useRef<THREE.Group>(null!);
   const [hovered, setHovered] = useState(false);
-  const [themeVars, setThemeVars] = useState(() => ({
-    card: "0 0% 8%",
-    muted: "0 0% 12%",
-    primary: "217 91% 60%",
-    foreground: "0 0% 100%",
-  }));
+  const [isDark, setIsDark] = useState(false);
 
   const cardWidth = size?.width ?? 1.4;
   const cardHeight = size?.height ?? 0.7;
   const cardDepth = size?.depth ?? 0.15;
   const fontSize = size?.fontSize ?? 0.16;
 
+  // Detect theme
   useEffect(() => {
-    const read = () => {
-      const styles = getComputedStyle(document.documentElement);
-      const defaults = {
-        card: "0 0% 8%",
-        muted: "0 0% 12%",
-        primary: "217 91% 60%",
-        foreground: "0 0% 100%",
-      };
-
-      const isDark =
+    const updateTheme = () => {
+      const dark =
         document.documentElement.classList.contains("dark") ||
         document.documentElement.getAttribute("data-theme") === "dark";
-
-      const getVar = (name: string, fallback: string) => {
-        const raw = styles.getPropertyValue(name).trim();
-        return raw || fallback;
-      };
-
-      setThemeVars({
-        card: isDark ? "0 0% 100%" : "0 0% 0%",
-        muted: isDark ? "0 0% 94%" : "0 0% 8%",
-        primary: getVar("--primary", defaults.primary),
-        foreground: isDark ? "0 0% 0%" : "0 0% 100%",
-      });
+      setIsDark(dark);
     };
 
-    read();
-    const observer = new MutationObserver(() => read());
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class", "data-theme"],
@@ -78,23 +54,26 @@ export default function TechCard({
     return () => observer.disconnect();
   }, []);
 
+  // 🎯 CORE THEME RULE (what you asked for)
   const colors = useMemo(() => {
-    const base = new THREE.Color(`hsl(${themeVars.card})`);
-    const hover = new THREE.Color(`hsl(${themeVars.muted})`);
-    const accent = new THREE.Color(`hsl(${themeVars.primary})`);
-    const foreground = new THREE.Color(`hsl(${themeVars.foreground})`);
-    return { base, hover, accent, foreground };
-  }, [themeVars]);
+    return {
+      card: isDark ? "#ffffff" : "#000000",
+      text: isDark ? "#000000" : "#ffffff",
+      accent: "#3b82f6",
+    };
+  }, [isDark]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
 
-    // Dynamic Scaling
     const scale = hovered || isActive ? 1.2 : 1.0;
-    meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.15);
+    meshRef.current.scale.lerp(
+      new THREE.Vector3(scale, scale, scale),
+      0.15
+    );
 
-    // Gentle "Floating" wobble
-    meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
+    meshRef.current.rotation.z =
+      Math.sin(state.clock.elapsedTime * 0.5) * 0.05;
   });
 
   return (
@@ -111,35 +90,37 @@ export default function TechCard({
         setHoveredTech(null);
         document.body.style.cursor = "auto";
       }}
-      
     >
-      {/* CARD BODY: Using RoundedBox for a premium UI feel */}
-      <RoundedBox args={[cardWidth, cardHeight, cardDepth]} radius={0.05} smoothness={4}>
+      {/* CARD */}
+      <RoundedBox args={[cardWidth, cardHeight, cardDepth]} radius={0.05}>
         <meshStandardMaterial
-          color={hovered || isActive ? colors.hover : colors.base}
-          roughness={0.3}
-          metalness={0.8}
+          color={colors.card}
+          roughness={0.4}
+          metalness={0.2}
           emissive={isActive ? colors.accent : "#000000"}
-          emissiveIntensity={isActive ? 0.5 : 0}
+          emissiveIntensity={isActive ? 0.4 : 0}
         />
       </RoundedBox>
 
-      {/* INNER GLOW / BORDER (Visible when hovered) */}
+      {/* Glow on hover/active */}
       {(hovered || isActive) && (
         <mesh position={[0, 0, -0.01]}>
-          <planeGeometry args={[1.5, 0.8]} />
-          <meshBasicMaterial color={colors.accent} transparent opacity={0.3} />
+          {/* <planeGeometry args={[1.6, 0.9]} />
+          <meshBasicMaterial
+            color={colors.accent}
+            transparent
+            opacity={0.25}
+          /> */}
         </mesh>
       )}
 
-      {/* TEXT: Raised slightly off the surface */}
+      {/* TEXT */}
       <Text
         position={[0, 0, 0.1]}
         fontSize={fontSize}
-        color={colors.foreground}
+        color={colors.text}
         anchorX="center"
         anchorY="middle"
-        letterSpacing={-0.02}
       >
         {label}
       </Text>
