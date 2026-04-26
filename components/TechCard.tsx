@@ -9,7 +9,7 @@ interface TechCardProps {
   label: string;
   basePosition: [number, number, number];
   isActive: boolean;
-  onSelect: (label: string) => void;
+
   setHoveredTech: (val: string | null) => void;
   size?: {
     width: number;
@@ -23,7 +23,7 @@ export default function TechCard({
   label,
   basePosition,
   isActive,
-  onSelect,
+  
   setHoveredTech,
   size,
 }: TechCardProps) {
@@ -111,7 +111,7 @@ export default function TechCard({
         setHoveredTech(null);
         document.body.style.cursor = "auto";
       }}
-      onClick={() => onSelect(label)}
+      
     >
       {/* CARD BODY: Using RoundedBox for a premium UI feel */}
       <RoundedBox args={[cardWidth, cardHeight, cardDepth]} radius={0.05} smoothness={4}>

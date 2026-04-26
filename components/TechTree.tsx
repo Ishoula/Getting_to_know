@@ -12,16 +12,23 @@ const treeData = [
   { label: "Backend", level: 1, branch: "right" },
   { label: "DevOps", level: 1, branch: "center" },
 
-  { label: "React", level: 2, branch: "left" },
-  { label: "Next.js", level: 2, branch: "left" },
-  { label: "Tailwind", level: 2, branch: "left" },
+  { label: "TypeScript", level: 2, branch: "left" },
+  { label: "Prisma", level: 2, branch: "right" },
+  { label: "Redis", level: 2, branch: "right" },
+  { label: "Jest", level: 2, branch: "left" },
+  { label: "GitHub Actions", level: 2, branch: "center" },
+  { label: "Kubernetes", level: 2, branch: "center" },
 
-  { label: "Node.js", level: 2, branch: "right" },
-  { label: "PostgreSQL", level: 2, branch: "right" },
-  { label: "GraphQL", level: 2, branch: "right" },
+  { label: "React", level: 3, branch: "left" },
+  { label: "Next.js", level: 3, branch: "left" },
+  { label: "Tailwind", level: 3, branch: "left" },
 
-  { label: "Docker", level: 2, branch: "center" },
-  { label: "AWS", level: 2, branch: "center" },
+  { label: "Node.js", level: 3, branch: "right" },
+  { label: "PostgreSQL", level: 3, branch: "right" },
+  { label: "GraphQL", level: 3, branch: "right" },
+
+  { label: "Docker", level: 3, branch: "center" },
+  { label: "AWS", level: 3, branch: "center" },
 ];
 
 export default function TechTree() {
@@ -40,31 +47,55 @@ export default function TechTree() {
       <ambientLight intensity={1.1} />
       <directionalLight position={[3, 4, 5]} intensity={0.8} />
 
-      <group position={[0, -1.5, 0]}>
+      <group position={[0, -3.0, 0]}>
         {treeData.map((tech, i) => {
           let x = 0;
           let y = tech.level * 1.8;
           let z = 0;
 
+          if (tech.level === 0) {
+            y += 0.8;
+          }
+
           if (tech.level === 1) {
-            if (tech.branch === "left") x = -2;
-            if (tech.branch === "right") x = 2;
-            if (tech.branch === "center") x = 0;
+            const allLevel1 = treeData.filter((t) => t.level === 1);
+            const globalIndex = allLevel1.indexOf(tech);
+            const total = allLevel1.length;
+
+            const halfWidth = 2.5;
+            const arcHeight = 0.5;
+
+            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
+            x = t * halfWidth;
+            y += arcHeight * (1 - t * t);
+            z = -0.1;
           }
 
           if (tech.level === 2) {
-            const siblings = treeData.filter(
-              (t) => t.level === 2 && t.branch === tech.branch
-            );
-            const index = siblings.indexOf(tech);
+            const allLevel2 = treeData.filter((t) => t.level === 2);
+            const globalIndex = allLevel2.indexOf(tech);
+            const total = allLevel2.length;
 
-            const spread = 1.3;
+            const halfWidth = 4.0;
+            const arcHeight = 0.6;
 
-            if (tech.branch === "left") x = -2.5 + index * spread;
-            if (tech.branch === "right") x = 2.5 - index * spread;
-            if (tech.branch === "center") x = (index - 1) * spread;
+            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
+            x = t * halfWidth;
+            y += -0.4 + arcHeight * (1 - t * t);
+            z = -0.3;
+          }
 
-            y += 0.6;
+          if (tech.level === 3) {
+            const allLevel3 = treeData.filter((t) => t.level === 3);
+            const globalIndex = allLevel3.indexOf(tech);
+            const total = allLevel3.length;
+
+            const halfWidth = 5.0;
+            const arcHeight = 1.2;
+
+            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
+            x = t * halfWidth;
+            y += -0.8 + arcHeight * (1 - t * t);
             z = -0.2;
           }
 
@@ -77,6 +108,11 @@ export default function TechTree() {
               onSelect={setActiveTech}
               setHoveredTech={setHoveredTech}
               mouse={mouse}
+              size={
+                tech.level === 0
+                  ? { width: 2.4, height: 0.9, depth: 0.18, fontSize: 0.22 }
+                  : undefined
+              }
             />
           );
         })}
