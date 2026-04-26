@@ -1,12 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, Database, Globe } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Code2, Database, Globe, Quote, Star } from "lucide-react";
 import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
 import TechTree from "@/components/TechTree";
 import FloatingBubbles from "@/components/FloatingBubbles";
+import { useEffect, useState } from "react";
+
+interface Recommendation {
+  _id: string;
+  name: string;
+  role: string;
+  company: string;
+  testimonial: string;
+  avatar?: string;
+  featured: boolean;
+}
+
 export default function HomePage() {
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+
+  useEffect(() => {
+    fetch("/api/recommendations")
+      .then((res) => res.json())
+      .then(setRecommendations)
+      .catch(console.error);
+  }, []);
   return (
     <>
     
@@ -103,6 +124,46 @@ export default function HomePage() {
           </Canvas>
         </div>
       </section>
+
+      {/* RECOMMENDATIONS SECTION */}
+      {recommendations.length > 0 && (
+        <section className="py-16 border-t border-border/40">
+          <div className="flex flex-col items-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Recommendations</h2>
+            <p className="text-muted-foreground text-sm">What people say about working with me</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {recommendations.slice(0, 6).map((rec) => (
+              <Card key={rec._id} className="relative overflow-hidden hover:shadow-lg transition-shadow">
+                {rec.featured && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <Star className="h-5 w-5 fill-primary text-primary" />
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
+                      {rec.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{rec.name}</h3>
+                      <p className="text-sm text-muted-foreground">{rec.role}</p>
+                      <p className="text-xs text-muted-foreground">{rec.company}</p>
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
+                    <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground">
+                      {rec.testimonial}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* CTA SECTION */}
       <section className="py-16 border-t border-border/40 mb-8 text-center">

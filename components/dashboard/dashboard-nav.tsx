@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FolderKanban, Mail, Home, LogOut, Menu, X } from "lucide-react";
+import { FolderKanban, Mail, Home, LogOut, Menu, X, MessageSquareQuote } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 
@@ -29,6 +29,7 @@ const navLinks = [
   { href: "/dashboard", label: "Overview", icon: Home },
   { href: "/dashboard/projects", label: "Projects", icon: FolderKanban },
   { href: "/dashboard/messages", label: "Messages", icon: Mail },
+  { href: "/dashboard/recommendations", label: "Recommendations", icon: MessageSquareQuote },
 ];
 
 export function DashboardNav({ user }: DashboardNavProps) {
