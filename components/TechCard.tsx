@@ -105,12 +105,6 @@ export default function TechCard({
       {/* Glow on hover/active */}
       {(hovered || isActive) && (
         <mesh position={[0, 0, -0.01]}>
-          {/* <planeGeometry args={[1.6, 0.9]} />
-          <meshBasicMaterial
-            color={colors.accent}
-            transparent
-            opacity={0.25}
-          /> */}
         </mesh>
       )}
 

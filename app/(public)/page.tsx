@@ -5,9 +5,13 @@ import { ArrowRight, Code2, Database, Globe } from "lucide-react";
 import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
 import TechTree from "@/components/TechTree";
+import FloatingBubbles from "@/components/FloatingBubbles";
 export default function HomePage() {
   return (
-    <div className="container mx-auto px-4">
+    <>
+    
+    <div className="container mx-auto px-4 relative">
+      <FloatingBubbles/>
       {/* HERO SECTION */}
       <section className="py-20 md:py-32">
         <div className="max-w-3xl">
@@ -118,5 +122,6 @@ export default function HomePage() {
         </Button>
       </section>
     </div>
+    </>
   );
 }

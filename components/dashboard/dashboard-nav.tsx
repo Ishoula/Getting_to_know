@@ -13,13 +13,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FolderKanban, Mail, Home, LogOut, User, Menu, X } from "lucide-react";
+import { FolderKanban, Mail, Home, LogOut, Menu, X } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
 
 interface DashboardNavProps {
   user: {
     name?: string | null;
     email?: string | null;
+    image?: string | null;
   };
 }
 
@@ -72,8 +74,13 @@ export function DashboardNav({ user }: DashboardNavProps) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <User className="h-5 w-5" />
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 ring-2 ring-transparent hover:ring-primary/50 transition-all">
+                <Avatar className="h-full w-full">
+                  <AvatarImage src={user.image || undefined} alt={user.name || "User"} />
+                  <AvatarFallback className="bg-primary text-primary-foreground font-medium">
+                    {user.name?.charAt(0).toUpperCase() || "U"}
+                  </AvatarFallback>
+                </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">

@@ -105,9 +105,8 @@ export default function TechTree() {
               label={tech.label}
               basePosition={[x, y, z]}
               isActive={activeTech === tech.label}
-              onSelect={setActiveTech}
               setHoveredTech={setHoveredTech}
-              mouse={mouse}
+              
               size={
                 tech.level === 0
                   ? { width: 2.8, height: 0.7, depth: 0.18, fontSize: 0.22 }

@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { DashboardNav } from "@/components/dashboard/dashboard-nav";
+import FloatingBubbles from "@/components/FloatingBubbles";
 
 export default async function DashboardLayout({
   children,
@@ -15,6 +16,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-background">
+      <FloatingBubbles/>
       <DashboardNav user={session.user} />
       <main className="container mx-auto px-4 py-8">{children}</main>
     </div>

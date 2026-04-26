@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+import FloatingBubbles from "@/components/FloatingBubbles";
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
@@ -14,6 +15,10 @@ export const metadata: Metadata = {
   description:
     "Full-stack developer portfolio showcasing projects, skills, and experience.",
   keywords: ["developer", "portfolio", "web development", "full-stack"],
+  icons:{
+    icon: "/icon.png",
+    
+  }
 };
 
 export default function RootLayout({
@@ -23,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+    
       <body className="font-sans antialiased bg-background">
+        <FloatingBubbles/>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
