@@ -3,33 +3,32 @@
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Preload } from "@react-three/drei";
-import * as THREE from "three";
 import TechCard from "./TechCard";
 
 const treeData = [
-  { label: "Software Development", level: 0, branch: "trunk" },
+  { label: "Software Development", level: 0 },
 
-  { label: "Frontend", level: 1, branch: "left" },
-  { label: "Backend", level: 1, branch: "right" },
-  { label: "DevOps", level: 1, branch: "center" },
+  { label: "Frontend", level: 1 },
+  { label: "Backend", level: 1 },
+  { label: "DevOps", level: 1 },
 
-  { label: "TypeScript", level: 2, branch: "left" },
-  { label: "Prisma", level: 2, branch: "right" },
-  { label: "Redis", level: 2, branch: "right" },
-  { label: "Jest", level: 2, branch: "left" },
-  { label: "GitHub Actions", level: 2, branch: "center" },
-  { label: "Kubernetes", level: 2, branch: "center" },
+  { label: "TypeScript", level: 2 },
+  { label: "Prisma", level: 2 },
+  { label: "Redis", level: 2 },
+  { label: "Jest", level: 2 },
+  { label: "GitHub Actions", level: 2 },
+  { label: "Kubernetes", level: 2 },
 
-  { label: "React", level: 3, branch: "left" },
-  { label: "Next.js", level: 3, branch: "left" },
-  { label: "Tailwind", level: 3, branch: "left" },
+  { label: "React", level: 3 },
+  { label: "Next.js", level: 3 },
+  { label: "Tailwind", level: 3 },
 
-  { label: "Node.js", level: 3, branch: "right" },
-  { label: "PostgreSQL", level: 3, branch: "right" },
-  { label: "GraphQL", level: 3, branch: "right" },
+  { label: "Node.js", level: 3 },
+  { label: "PostgreSQL", level: 3 },
+  { label: "GraphQL", level: 3 },
 
-  { label: "Docker", level: 3, branch: "center" },
-  { label: "AWS", level: 3, branch: "center" },
+  { label: "Docker", level: 3 },
+  { label: "AWS", level: 3 },
 ];
 
 export default function TechTree() {
@@ -37,7 +36,7 @@ export default function TechTree() {
     <Canvas
       camera={{ position: [0, 0, 8], fov: 45 }}
       gl={{ antialias: true }}
-      dpr={1} 
+      dpr={1}
       className="w-full h-full"
     >
       <TechTreeContent />
@@ -49,6 +48,7 @@ export default function TechTree() {
 function TechTreeContent() {
   const [activeTech, setActiveTech] = useState<string | null>(null);
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const isAnyHovered = hoveredTech !== null;
   const mouse = useRef({ x: 0, y: 0 }).current;
 
   useFrame(({ mouse: m }) => {
@@ -62,55 +62,35 @@ function TechTreeContent() {
       <ambientLight intensity={1.1} />
       <directionalLight position={[3, 4, 5]} intensity={0.8} />
 
-      <group position={[0, -3.0, 0]}>
-        {treeData.map((tech, i) => {
+      <group position={[0, -4.0, 0]}>
+        {treeData.map((tech) => {
           let x = 0;
           let y = tech.level * 1.8;
           let z = 0;
 
-          if (tech.level === 0) {
-            y += 0.8;
-          }
+          if (tech.level === 0) y += 1.2;
+
+          const levelItems = treeData.filter((t) => t.level === tech.level);
+          const index = levelItems.indexOf(tech);
+          const total = levelItems.length;
+
+          const t = total > 1 ? (index / (total - 1)) * 2 - 1 : 0;
 
           if (tech.level === 1) {
-            const allLevel1 = treeData.filter((t) => t.level === 1);
-            const globalIndex = allLevel1.indexOf(tech);
-            const total = allLevel1.length;
-
-            const halfWidth = 2.5;
-            const arcHeight = 0.5;
-
-            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
-            x = t * halfWidth;
-            y += arcHeight * (1 - t * t);
+            x = t * 2.5;
+            y += 0.5 * (1 - t * t);
             z = -0.1;
           }
 
           if (tech.level === 2) {
-            const allLevel2 = treeData.filter((t) => t.level === 2);
-            const globalIndex = allLevel2.indexOf(tech);
-            const total = allLevel2.length;
-
-            const halfWidth = 4.0;
-            const arcHeight = 0.6;
-
-            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
-            x = t * halfWidth;
-            y += -0.4 + arcHeight * (1 - t * t);
+            x = t * 4;
+            y += -0.4 + 0.6 * (1 - t * t);
             z = -0.3;
           }
 
           if (tech.level === 3) {
-            const allLevel3 = treeData.filter((t) => t.level === 3);
-            const globalIndex = allLevel3.indexOf(tech);
-            const total = allLevel3.length;
-
-            const halfWidth = 5.0;
-            const arcHeight = 1.2;
-
-            const t = total > 1 ? (globalIndex / (total - 1)) * 2 - 1 : 0;
-            x = t * halfWidth;
-            y += -0.8 + arcHeight * (1 - t * t);
+            x = t * 5;
+            y += -0.8 + 1.2 * (1 - t * t);
             z = -0.2;
           }
 
@@ -121,7 +101,7 @@ function TechTreeContent() {
               basePosition={[x, y, z]}
               isActive={activeTech === tech.label}
               setHoveredTech={setHoveredTech}
-              
+              isAnyHovered={isAnyHovered}
               size={
                 tech.level === 0
                   ? { width: 2.8, height: 0.7, depth: 0.18, fontSize: 0.22 }
@@ -133,4 +113,4 @@ function TechTreeContent() {
       </group>
     </>
   );
-}
+}
