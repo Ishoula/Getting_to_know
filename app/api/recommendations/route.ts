@@ -5,11 +5,14 @@ import { auth } from "@/lib/auth";
 
 export const maxDuration = 60;
 
-// GET all recommendations (public)
+// GET all recommendations (public gets only approved, admin gets all)
 export async function GET() {
   try {
+    const session = await auth();
     await connectToDatabase();
-    const recommendations = await Recommendation.find({}).sort({ createdAt: -1 });
+
+    const filter = session?.user ? {} : { approved: true };
+    const recommendations = await Recommendation.find(filter).sort({ createdAt: -1 });
     return NextResponse.json(recommendations);
   } catch (error) {
     console.error("Error fetching recommendations:", error);
@@ -20,17 +23,11 @@ export async function GET() {
   }
 }
 
-// POST create new recommendation (protected)
+// POST create new recommendation (public - always unapproved)
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth();
-
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const body = await request.json();
-    const { name, role, company, testimonial, avatar, featured } = body;
+    const { name, role, company, testimonial } = body;
 
     if (!name || !role || !company || !testimonial) {
       return NextResponse.json(
@@ -45,8 +42,7 @@ export async function POST(request: NextRequest) {
       role,
       company,
       testimonial,
-      avatar,
-      featured: featured || false,
+      approved: false,
     });
 
     return NextResponse.json(recommendation, { status: 201 });

@@ -2,12 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Code2, Database, Globe, Quote, Star } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowRight, Code2, Database, Globe, Quote, Star, Send, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Canvas } from "@react-three/fiber";
 import TechTree from "@/components/TechTree";
 import FloatingBubbles from "@/components/FloatingBubbles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface Recommendation {
   _id: string;
@@ -19,15 +22,73 @@ interface Recommendation {
   featured: boolean;
 }
 
+const ITEMS_PER_PAGE = 3;
+
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const [showRecForm, setShowRecForm] = useState(false);
+  const [recForm, setRecForm] = useState({ name: "", role: "", company: "", testimonial: "" });
+  const [recSubmitting, setRecSubmitting] = useState(false);
+  const [recSuccess, setRecSuccess] = useState(false);
 
   useEffect(() => {
     fetch("/api/recommendations")
       .then((res) => res.json())
-      .then(setRecommendations)
+      .then((data) => {
+        setRecommendations(data);
+      })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    if (recommendations.length <= ITEMS_PER_PAGE) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && visibleCount < recommendations.length) {
+          setLoadingMore(true);
+          setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, recommendations.length));
+            setLoadingMore(false);
+          }, 400);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const el = loadMoreRef.current;
+    if (el) observer.observe(el);
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, [recommendations.length, visibleCount]);
+
+  const handleRecSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setRecSubmitting(true);
+    try {
+      const res = await fetch("/api/recommendations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(recForm),
+      });
+      if (res.ok) {
+        setRecSuccess(true);
+        setRecForm({ name: "", role: "", company: "", testimonial: "" });
+        setTimeout(() => {
+          setRecSuccess(false);
+          setShowRecForm(false);
+        }, 3000);
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setRecSubmitting(false);
+    }
+  };
   return (
     <>
     
@@ -126,44 +187,136 @@ export default function HomePage() {
       </section>
 
       {/* RECOMMENDATIONS SECTION */}
-      {recommendations.length > 0 && (
-        <section className="py-16 border-t border-border/40">
+      <section className="py-16 border-t border-border/40">
           <div className="flex flex-col items-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">Recommendations</h2>
             <p className="text-muted-foreground text-sm">What people say about working with me</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recommendations.slice(0, 6).map((rec) => (
-              <Card key={rec._id} className="relative overflow-hidden hover:shadow-lg transition-shadow">
-                {rec.featured && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Star className="h-5 w-5 fill-primary text-primary" />
-                  </div>
-                )}
+          {recommendations.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {recommendations.slice(0, visibleCount).map((rec) => (
+                <Card key={rec._id} className="relative overflow-hidden hover:shadow-lg transition-shadow">
+                  {rec.featured && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <Star className="h-5 w-5 fill-primary text-primary" />
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
+                        {rec.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">{rec.name}</h3>
+                        <p className="text-sm text-muted-foreground">{rec.role}</p>
+                        <p className="text-xs text-muted-foreground">{rec.company}</p>
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
+                      <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground">
+                        {rec.testimonial}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {/* Infinite scroll sentinel */}
+          {recommendations.length > visibleCount && (
+            <div ref={loadMoreRef} className="flex justify-center py-6">
+              {loadingMore && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <span className="text-sm">Loading more...</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Recommend Me Form */}
+          <div className="max-w-xl mx-auto">
+            {!showRecForm ? (
+              <div className="text-center">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => setShowRecForm(true)}
+                  className="group"
+                >
+                  <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition" />
+                  Recommend Me
+                </Button>
+              </div>
+            ) : (
+              <Card>
                 <CardContent className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
-                      {rec.name.charAt(0).toUpperCase()}
+                  {recSuccess ? (
+                    <div className="text-center py-6">
+                      <p className="text-lg font-medium text-primary mb-2">Thank you!</p>
+                      <p className="text-sm text-muted-foreground">Your recommendation has been submitted for review.</p>
                     </div>
-                    <div>
-                      <h3 className="font-semibold">{rec.name}</h3>
-                      <p className="text-sm text-muted-foreground">{rec.role}</p>
-                      <p className="text-xs text-muted-foreground">{rec.company}</p>
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
-                    <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground">
-                      {rec.testimonial}
-                    </p>
-                  </div>
+                  ) : (
+                    <form onSubmit={handleRecSubmit} className="space-y-4">
+                      <h3 className="text-lg font-semibold mb-2">Write a Recommendation</h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="rec-name">Your Name *</Label>
+                          <Input
+                            id="rec-name"
+                            value={recForm.name}
+                            onChange={(e) => setRecForm({ ...recForm, name: e.target.value })}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="rec-role">Your Role *</Label>
+                          <Input
+                            id="rec-role"
+                            value={recForm.role}
+                            onChange={(e) => setRecForm({ ...recForm, role: e.target.value })}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="rec-company">Company *</Label>
+                        <Input
+                          id="rec-company"
+                          value={recForm.company}
+                          onChange={(e) => setRecForm({ ...recForm, company: e.target.value })}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="rec-testimonial">Your Recommendation *</Label>
+                        <Textarea
+                          id="rec-testimonial"
+                          value={recForm.testimonial}
+                          onChange={(e) => setRecForm({ ...recForm, testimonial: e.target.value })}
+                          required
+                          rows={4}
+                          placeholder="Share your experience working with me..."
+                        />
+                      </div>
+                      <div className="flex gap-3">
+                        <Button type="submit" disabled={recSubmitting}>
+                          {recSubmitting ? "Submitting..." : "Submit Recommendation"}
+                        </Button>
+                        <Button type="button" variant="ghost" onClick={() => setShowRecForm(false)}>
+                          Cancel
+                        </Button>
+                      </div>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
-            ))}
+            )}
           </div>
         </section>
-      )}
 
       {/* CTA SECTION */}
       <section className="py-16 border-t border-border/40 mb-8 text-center">

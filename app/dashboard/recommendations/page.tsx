@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Trash2, Plus, Star } from "lucide-react";
+import { Trash2, Plus, Star, CheckCircle, XCircle, Clock } from "lucide-react";
 import { toast } from "sonner";
 
 interface Recommendation {
@@ -18,6 +18,7 @@ interface Recommendation {
   testimonial: string;
   avatar?: string;
   featured: boolean;
+  approved: boolean;
 }
 
 export default function RecommendationsPage() {
@@ -88,6 +89,26 @@ export default function RecommendationsPage() {
     } catch (error) {
       console.error("Error deleting recommendation:", error);
       toast.error("Failed to delete recommendation");
+    }
+  };
+
+  const handleApproval = async (id: string, approved: boolean) => {
+    try {
+      const res = await fetch(`/api/recommendations/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ approved }),
+      });
+
+      if (res.ok) {
+        toast.success(approved ? "Recommendation approved" : "Recommendation rejected");
+        fetchRecommendations();
+      } else {
+        toast.error("Failed to update recommendation");
+      }
+    } catch (error) {
+      console.error("Error updating recommendation:", error);
+      toast.error("Failed to update recommendation");
     }
   };
 
@@ -192,7 +213,7 @@ export default function RecommendationsPage() {
           </Card>
         ) : (
           recommendations.map((rec) => (
-            <Card key={rec._id}>
+            <Card key={rec._id} className={rec.approved ? "" : "border-amber-500/30"}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -206,6 +227,15 @@ export default function RecommendationsPage() {
                           {rec.featured && (
                             <Star className="h-4 w-4 fill-primary text-primary" />
                           )}
+                          {rec.approved ? (
+                            <span className="inline-flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full dark:bg-green-900/30 dark:text-green-400">
+                              <CheckCircle className="h-3 w-3" /> Approved
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full dark:bg-amber-900/30 dark:text-amber-400">
+                              <Clock className="h-3 w-3" /> Pending
+                            </span>
+                          )}
                         </div>
                         <p className="text-sm text-muted-foreground">
                           {rec.role} • {rec.company}
@@ -214,14 +244,34 @@ export default function RecommendationsPage() {
                     </div>
                     <p className="text-sm text-muted-foreground">{rec.testimonial}</p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleDelete(rec._id)}
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <div className="flex items-start gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleApproval(rec._id, !rec.approved)}
+                      className={rec.approved
+                        ? "text-amber-600 border-amber-300 hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                        : "text-green-600 border-green-300 hover:bg-green-50 dark:hover:bg-green-900/20"}
+                    >
+                      {rec.approved ? (
+                        <>
+                          <XCircle className="h-4 w-4 mr-1" /> Reject
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="h-4 w-4 mr-1" /> Approve
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDelete(rec._id)}
+                      className="text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -7,6 +7,7 @@ export interface IRecommendation extends Document {
   testimonial: string;
   avatar?: string;
   featured: boolean;
+  approved: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -42,6 +43,10 @@ const RecommendationSchema = new Schema<IRecommendation>(
       trim: true,
     },
     featured: {
+      type: Boolean,
+      default: false,
+    },
+    approved: {
       type: Boolean,
       default: false,
     },
