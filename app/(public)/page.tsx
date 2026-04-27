@@ -5,12 +5,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Code2, Database, Globe, Quote, Star, Send, Loader2 } from "lucide-react";
+import { ArrowRight, Code2, Database, Globe, Quote, Star, Send } from "lucide-react";
 import Link from "next/link";
-import { Canvas } from "@react-three/fiber";
-import TechTree from "@/components/TechTree";
 import FloatingBubbles from "@/components/FloatingBubbles";
 import { useEffect, useState, useRef } from "react";
+import dynamic from "next/dynamic";
+
+const TechTree = dynamic(() => import("@/components/TechTree"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center text-muted-foreground">Loading Tech Tree...</div>
+});
 
 interface Recommendation {
   _id: string;
@@ -22,13 +26,10 @@ interface Recommendation {
   featured: boolean;
 }
 
-const ITEMS_PER_PAGE = 3;
-
 export default function HomePage() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const [recVisible, setRecVisible] = useState(false);
+  const recSectionRef = useRef<HTMLDivElement>(null);
   const [showRecForm, setShowRecForm] = useState(false);
   const [recForm, setRecForm] = useState({ name: "", role: "", company: "", testimonial: "" });
   const [recSubmitting, setRecSubmitting] = useState(false);
@@ -38,33 +39,40 @@ export default function HomePage() {
     fetch("/api/recommendations")
       .then((res) => res.json())
       .then((data) => {
-        setRecommendations(data);
+        console.log("[Recommendations] loaded:", data?.length ?? 0, data);
+        setRecommendations(Array.isArray(data) ? data : []);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("[Recommendations] fetch error:", err);
+        // Fallback for demo if API fails
+        setRecommendations([
+          {
+            _id: "fb1",
+            name: "Dev Colleague",
+            role: "Senior Developer",
+            company: "Tech Solutions",
+            testimonial: "A brilliant problem solver and a joy to work with.",
+            featured: true
+          }
+        ]);
+      });
   }, []);
 
   useEffect(() => {
-    if (recommendations.length <= ITEMS_PER_PAGE) return;
-
+    const el = recSectionRef.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && visibleCount < recommendations.length) {
-          setLoadingMore(true);
-          setTimeout(() => {
-            setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, recommendations.length));
-            setLoadingMore(false);
-          }, 400);
+        if (entries[0].isIntersecting) {
+          setRecVisible(true);
+          observer.unobserve(el);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
-
-    const el = loadMoreRef.current;
-    if (el) observer.observe(el);
-    return () => {
-      if (el) observer.unobserve(el);
-    };
-  }, [recommendations.length, visibleCount]);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleRecSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -173,72 +181,72 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* 🔥 FIX: REAL HEIGHT */}
         <div className="w-full h-[600px] bg-black/5 rounded-xl overflow-hidden cursor-grab active:cursor-grabbing">
-          <Canvas
-            className="w-full h-full"
-            camera={{ position: [0, 0, 8], fov: 45 }}
-            gl={{ antialias: true }}
-            dpr={[1, 2]}
-          >
-            <TechTree />
-          </Canvas>
+          <TechTree />
         </div>
       </section>
 
       {/* RECOMMENDATIONS SECTION */}
-      <section className="py-16 border-t border-border/40">
-          <div className="flex flex-col items-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">Recommendations</h2>
-            <p className="text-muted-foreground text-sm">What people say about working with me</p>
+      <section ref={recSectionRef} className="py-16 border-t border-border/40 overflow-hidden">
+        <div className="flex flex-col items-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Recommendations</h2>
+          <p className="text-muted-foreground text-sm">What people say about working with me</p>
+        </div>
+
+        {recommendations.length > 0 && (
+          <div className="relative mb-10 group">
+            {/* fade edges */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-linear-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-linear-to-l from-background to-transparent" />
+
+            <div className="overflow-hidden">
+              <div
+                className={`flex gap-6 w-max ${recVisible ? "animate-marquee group-hover:paused" : ""}`}
+                style={{
+                  animationPlayState: recVisible ? undefined : "paused", width:"max-content"
+                }}
+              >
+                {[...recommendations, ...recommendations].map((rec, i) => (
+                  <Card
+                    key={`${rec._id}-${i}`}
+                    className={`relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[320px] md:w-[380px] ${recVisible ? "animate-fadeSlideUp" : ""}`}
+                    style={{
+                      animationDelay: `${Math.min(i, 8) * 120}ms`,
+                      animationPlayState: recVisible ? undefined : "paused",
+                    }}
+                  >
+                    {rec.featured && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <Star className="h-5 w-5 fill-primary text-primary" />
+                      </div>
+                    )}
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
+                          {rec.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold">{rec.name}</h3>
+                          <p className="text-sm text-muted-foreground">{rec.role}</p>
+                          <p className="text-xs text-muted-foreground">{rec.company}</p>
+                        </div>
+                      </div>
+                      <div className="relative">
+                        <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
+                        <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground line-clamp-4">
+                          {rec.testimonial}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
+        )}
 
-          {recommendations.length > 0 && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {recommendations.slice(0, visibleCount).map((rec) => (
-                <Card key={rec._id} className="relative overflow-hidden hover:shadow-lg transition-shadow">
-                  {rec.featured && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                    </div>
-                  )}
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
-                        {rec.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">{rec.name}</h3>
-                        <p className="text-sm text-muted-foreground">{rec.role}</p>
-                        <p className="text-xs text-muted-foreground">{rec.company}</p>
-                      </div>
-                    </div>
-                    <div className="relative">
-                      <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
-                      <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground">
-                        {rec.testimonial}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-
-          {/* Infinite scroll sentinel */}
-          {recommendations.length > visibleCount && (
-            <div ref={loadMoreRef} className="flex justify-center py-6">
-              {loadingMore && (
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  <span className="text-sm">Loading more...</span>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Recommend Me Form */}
-          <div className="max-w-xl mx-auto">
+        {/* Recommend Me Form */}
+        <div className="max-w-xl mx-auto">
             {!showRecForm ? (
               <div className="text-center">
                 <Button

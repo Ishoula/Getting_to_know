@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Preload } from "@react-three/drei";
 import * as THREE from "three";
 import TechCard from "./TechCard";
 
@@ -32,6 +33,20 @@ const treeData = [
 ];
 
 export default function TechTree() {
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 8], fov: 45 }}
+      gl={{ antialias: true }}
+      dpr={1} 
+      className="w-full h-full"
+    >
+      <TechTreeContent />
+      <Preload all />
+    </Canvas>
+  );
+}
+
+function TechTreeContent() {
   const [activeTech, setActiveTech] = useState<string | null>(null);
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   const mouse = useRef({ x: 0, y: 0 }).current;
@@ -118,4 +133,4 @@ export default function TechTree() {
       </group>
     </>
   );
-}
+}

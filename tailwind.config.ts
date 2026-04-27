@@ -11,6 +11,8 @@ const config: Config = {
       animation: {
         floatBubble: "floatBubble linear infinite",
         bubbleShine: "bubbleShine ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
+        fadeSlideUp: "fadeSlideUp 0.6s ease-out forwards",
       },
       keyframes: {
         floatBubble: {
@@ -22,6 +24,14 @@ const config: Config = {
         bubbleShine: {
           "0%, 100%": { opacity: "0" },
           "50%": { opacity: "0.8" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        fadeSlideUp: {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },

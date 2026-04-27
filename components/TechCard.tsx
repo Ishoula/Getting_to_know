@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text, RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
+import { useTheme } from "next-themes";
 
 interface TechCardProps {
   label: string;
@@ -27,32 +28,13 @@ export default function TechCard({
 }: TechCardProps) {
   const meshRef = useRef<THREE.Group>(null!);
   const [hovered, setHovered] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const cardWidth = size?.width ?? 1.4;
   const cardHeight = size?.height ?? 0.7;
   const cardDepth = size?.depth ?? 0.15;
   const fontSize = size?.fontSize ?? 0.16;
-
-  // Detect theme
-  useEffect(() => {
-    const updateTheme = () => {
-      const dark =
-        document.documentElement.classList.contains("dark") ||
-        document.documentElement.getAttribute("data-theme") === "dark";
-      setIsDark(dark);
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   // 🎯 CORE THEME RULE (what you asked for)
   const colors = useMemo(() => {
@@ -63,14 +45,14 @@ export default function TechCard({
     };
   }, [isDark]);
 
+  const targetScale = useRef(new THREE.Vector3(1, 1, 1));
+
   useFrame((state) => {
     if (!meshRef.current) return;
 
-    const scale = hovered || isActive ? 1.2 : 1.0;
-    meshRef.current.scale.lerp(
-      new THREE.Vector3(scale, scale, scale),
-      0.15
-    );
+    const s = hovered || isActive ? 1.2 : 1.0;
+    targetScale.current.set(s, s, s);
+    meshRef.current.scale.lerp(targetScale.current, 0.15);
 
     meshRef.current.rotation.z =
       Math.sin(state.clock.elapsedTime * 0.5) * 0.05;

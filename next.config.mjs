@@ -2,7 +2,6 @@
 const nextConfig = {
   // Turbopack is now stable and the default bundler in Next.js 16
   // React Compiler — stable opt-in, auto-memoizes components
-  reactCompiler: false,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -11,6 +10,7 @@ const nextConfig = {
   },
   // Mongoose uses Node.js-specific APIs; keep it server-only
   serverExternalPackages: ["mongoose"],
+  transpilePackages: ["three"],
 };
 
 export default nextConfig;

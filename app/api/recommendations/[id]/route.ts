@@ -8,9 +8,10 @@ export const maxDuration = 60;
 // PATCH approve/reject recommendation (protected)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -26,7 +27,7 @@ export async function PATCH(
     if (typeof featured === "boolean") update.featured = featured;
 
     const recommendation = await Recommendation.findByIdAndUpdate(
-      params.id,
+      id,
       update,
       { new: true }
     );
@@ -51,9 +52,10 @@ export async function PATCH(
 // DELETE recommendation (protected)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -61,7 +63,7 @@ export async function DELETE(
     }
 
     await connectToDatabase();
-    const recommendation = await Recommendation.findByIdAndDelete(params.id);
+    const recommendation = await Recommendation.findByIdAndDelete(id);
 
     if (!recommendation) {
       return NextResponse.json(

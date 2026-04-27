@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/db";
 import Recommendation from "@/models/Recommendation";
 import { auth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 // GET all recommendations (public gets only approved, admin gets all)
@@ -11,7 +12,7 @@ export async function GET() {
     const session = await auth();
     await connectToDatabase();
 
-    const filter = session?.user ? {} : { approved: true };
+    const filter = session?.user ? {} : { approved: { $ne: false } };
     const recommendations = await Recommendation.find(filter).sort({ createdAt: -1 });
     return NextResponse.json(recommendations);
   } catch (error) {
