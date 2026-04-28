@@ -1,50 +1,46 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award, Github } from "lucide-react";
+import { Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award, Github } from "lucide-react";
 import Link from "next/link";
+import { PrintButton } from "@/components/PrintButton";
 
+const experiences = [
+  {
+    title: "Data Analyst",
+    company: "CodeAlpha",
+    period: "2025",
+    description: "WOrked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
+  },
+  {
+    title: "Data Analyst",
+    company: "Sandai Global",
+    period: "2025-Present",
+    description: "Currently working as a data detective analyzing complex datasets to uncover insights that drove strategic decisions. Developed interactive dashboards and visualizations using Microsoft Excel, resulting in a 30% increase in data-driven decision-making across the organization.",
+  },
+  {
+    title: "Fullstack Developer",
+    company: "Sunnet",
+    period: "2026-Present",
+    description: "Worked as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
+  },
+];
 
+const education = [
+  {
+    degree: "RWanda Coding Academy",
+    school: "University of Rwanda",
+    period: "2024-Present",
+  },
+];
+
+const skills = [
+  { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
+  { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma", "SpringBoot"] },
+  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "Python",] },
+  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
+];
 
 export default function ResumePage() {
-  const experiences = [
-    {
-      title: "Data Analyst",
-      company: "CodeAlpha",
-      period: "2025",
-      description: "WOrked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
-    },
-    {
-      title: "Data Analyst",
-      company: "Sandai Global",
-      period: "2025-Present",
-      description: "Currently working as a data detective analyzing complex datasets to uncover insights that drove strategic decisions. Developed interactive dashboards and visualizations using Microsoft Excel, resulting in a 30% increase in data-driven decision-making across the organization.",
-    },
-    {
-        title: "Fullstack Developer",
-        company: "Sunnet",
-        period: "2026-Present",
-        description: "Worked as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
-      },
-  ];
-
-  const education = [
-    {
-      degree: "RWanda Coding Academy",
-      school: "University of Rwanda",
-      period: "2024-Present",
-    },
-  ];
-
-  const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion","JSP"] },
-    { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma","SpringBoot"] },
-    { category: "Tools & Others", items: ["Git", " Ms.Excel","Google Sheets","Cloudinary","Python",] },
-    {category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
-  ];
-
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8">
@@ -70,15 +66,7 @@ export default function ResumePage() {
             </span>
           </div>
         </div>
-        <Button 
-          onClick={() => window.print()}
-          className="rounded-full shadow-xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group animate-fade-slide-up print:hidden" 
-          style={{ animationDelay: "200ms" }}
-        >
-          <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
-          Download PDF
-        </Button>
-
+        <PrintButton />
       </div>
 
       <div className="grid gap-16">
