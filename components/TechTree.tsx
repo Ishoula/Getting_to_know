@@ -32,27 +32,9 @@ const treeData = [
 ];
 
 export default function TechTree() {
-  const timerMock = React.useMemo(() => {
-    let start = typeof performance !== "undefined" ? performance.now() : 0;
-    let last = start;
-    return {
-      getElapsedTime: () => (performance.now() - start) / 1000,
-      getDelta: () => {
-        const now = performance.now();
-        const dt = (now - last) / 1000;
-        last = now;
-        return dt;
-      },
-      start: () => {},
-      stop: () => {},
-      running: true
-    };
-  }, []);
-
   return (
     <Canvas
       camera={{ position: [0, 0, 8], fov: 45 }}
-      clock={timerMock as any}
       gl={{ 
         antialias: true,
         powerPreference: "high-performance",
