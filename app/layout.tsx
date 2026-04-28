@@ -3,8 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import FloatingBubbles from "@/components/FloatingBubbles";
+import FloatingStars from "@/components/FloatingStars";
+import { CustomCursor } from "@/components/custom-cursor";
+
 const _geist = Geist({ subsets: ["latin"] });
+
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,15 +33,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
     
       <body className="font-sans antialiased bg-background">
-        <FloatingBubbles/>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+          <CustomCursor />
+          <FloatingStars/>
           {children}
         </ThemeProvider>
+
+
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

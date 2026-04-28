@@ -7,8 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowRight, Code2, Database, Globe, Quote, Star, Send, MessageSquare, X } from "lucide-react";
 import Link from "next/link";
-import FloatingBubbles from "@/components/FloatingBubbles";
+
 import { useEffect, useState, useRef } from "react";
+
 import dynamic from "next/dynamic";
 import { ContactForm } from "@/components/contact-form";
 import { ProjectCard } from "@/components/project-card";
@@ -123,8 +124,8 @@ export default function HomePage() {
     <>
     
     <div className="container mx-auto px-4 relative">
-      <FloatingBubbles/>
       {/* HERO SECTION */}
+
       <section className="py-20 md:py-32">
         <div className="max-w-3xl">
           <p className="text-muted-foreground mb-4 animate-fade-in-up">

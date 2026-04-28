@@ -11,37 +11,38 @@ import Link from "next/link";
 export default function ResumePage() {
   const experiences = [
     {
-      title: "Senior Full-Stack Developer",
-      company: "Tech Innovations Ltd",
-      period: "2022 - Present",
-      description: "Leading the development of enterprise-scale web applications using React, Next.js, and Node.js. Improved system performance by 40% and mentored junior developers.",
+      title: "Data Analyst",
+      company: "CodeAlpha",
+      period: "2025",
+      description: "WOrked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
     },
     {
-      title: "Full-Stack Developer",
-      company: "Digital Solutions Agency",
-      period: "2020 - 2022",
-      description: "Developed and maintained multiple client projects across various industries. Implemented automated testing and modern CI/CD pipelines.",
+      title: "Data Analyst",
+      company: "Sandai Global",
+      period: "2025-Present",
+      description: "Currently working as a data detective analyzing complex datasets to uncover insights that drove strategic decisions. Developed interactive dashboards and visualizations using Microsoft Excel, resulting in a 30% increase in data-driven decision-making across the organization.",
     },
     {
-        title: "Junior Developer",
-        company: "StartUp Hub",
-        period: "2018 - 2020",
-        description: "Assisted in building responsive web interfaces and developing RESTful APIs for emerging startups.",
+        title: "Fullstack Developer",
+        company: "Sunnet",
+        period: "2026-Present",
+        description: "Worked as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
       },
   ];
 
   const education = [
     {
-      degree: "Bachelor of Science in Computer Science",
+      degree: "RWanda Coding Academy",
       school: "University of Rwanda",
-      period: "2015 - 2019",
+      period: "2024-Present",
     },
   ];
 
   const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion"] },
-    { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "GraphQL", "Prisma"] },
-    { category: "Tools & Others", items: ["Git", "Docker", "AWS", "CI/CD", "Jest", "Cloudinary"] },
+    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion","JSP"] },
+    { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma","SpringBoot"] },
+    { category: "Tools & Others", items: ["Git", " Ms.Excel","Google Sheets","Cloudinary","Python",] },
+    {category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
   ];
 
   return (
@@ -65,7 +66,7 @@ export default function ResumePage() {
             </a>
             <span className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
-              Kigali, Rwanda
+              Mussanze, Rwanda
             </span>
           </div>
         </div>
@@ -163,10 +164,11 @@ export default function ResumePage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
-              "AWS Certified Solutions Architect",
-              "Meta Front-End Developer Professional",
-              "Google Cloud Digital Leader",
-              "Advanced React Specialization"
+              "Introduction to Programming using Python",
+              "PicoCTF-Afrrica 2025 Certificate of Achievement",
+              "Wavumbuzi Entrepreneurship Certificate",
+              "AI Fundamentals certificate",
+              "Data Literacy certificate"
             ].map((cert, i) => (
               <div key={i} className="flex items-center gap-3 p-4 rounded-xl border border-border/40 bg-card/30">
                 <div className="h-2 w-2 rounded-full bg-primary" />
