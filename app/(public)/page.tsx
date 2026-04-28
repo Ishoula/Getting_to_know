@@ -219,6 +219,7 @@ export default function HomePage() {
             {projects.map((project) => (
               <ProjectCard
                 key={project._id}
+                id={project._id}
                 title={project.title}
                 description={project.description}
                 techStack={project.techStack}

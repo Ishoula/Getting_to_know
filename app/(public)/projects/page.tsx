@@ -45,6 +45,7 @@ export default async function ProjectsPage() {
           }) => (
             <ProjectCard
               key={project._id}
+              id={project._id}
               title={project.title}
               description={project.description}
               techStack={project.techStack}
