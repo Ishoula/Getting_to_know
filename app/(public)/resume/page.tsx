@@ -50,7 +50,66 @@ export default function ResumePage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8">
         <div className="animate-fade-slide-up" style={{ animationDelay: "100ms" }}>
           <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">Ishoula</h1>
-          <p className="text-xl text-primary font-medium">Full-Stack Developer</p>
+          <p class
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          Name="text-xl text-primary font-medium">Full-Stack Developer</p>
           <div className="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sm text-muted-foreground">
             <a href="mailto:shoulamite2k@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="h-4 w-4" />

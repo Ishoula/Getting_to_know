@@ -57,48 +57,52 @@ export default function TechCard({
   }), []);
 
   const targetScale = useRef(new THREE.Vector3(1, 1, 1));
-useFrame((state) => {
-  if (!meshRef.current) return;
+  const timeRef = useRef(0);
 
-  const t = state.clock.elapsedTime;
+  useFrame((state, delta) => {
+    if (!meshRef.current) return;
 
-  // 🧲 STOP ALL motion if ANY card is hovered
-  if (!isAnyHovered) {
-    meshRef.current.position.x =
-      basePosition[0] +
-      Math.sin(t * random.speed + random.phase) *
-        random.amplitude *
-        random.offsetX;
+    timeRef.current += delta;
+    const t = timeRef.current;
 
-    meshRef.current.position.y =
-      basePosition[1] +
-      Math.cos(t * random.speed + random.phase) *
-        random.amplitude *
-        random.offsetY;
+    // 🧲 STOP ALL motion if ANY card is hovered
+    if (!isAnyHovered) {
+      meshRef.current.position.x =
+        basePosition[0] +
+        Math.sin(t * random.speed + random.phase) *
+          random.amplitude *
+          random.offsetX;
 
-    meshRef.current.position.z =
-      basePosition[2] +
-      Math.sin(t * random.speed) * 0.1;
+      meshRef.current.position.y =
+        basePosition[1] +
+        Math.cos(t * random.speed + random.phase) *
+          random.amplitude *
+          random.offsetY;
 
-    meshRef.current.rotation.z =
-      Math.sin(t * random.speed) * 0.08;
-  } else {
-    meshRef.current.position.lerp(
-      new THREE.Vector3(...basePosition),
-      0.2
-    );
+      meshRef.current.position.z =
+        basePosition[2] +
+        Math.sin(t * random.speed) * 0.1;
 
-    meshRef.current.rotation.z = THREE.MathUtils.lerp(
-      meshRef.current.rotation.z,
-      0,
-      0.2
-    );
-  }
+      meshRef.current.rotation.z =
+        Math.sin(t * random.speed) * 0.08;
+    } else {
+      meshRef.current.position.lerp(
+        new THREE.Vector3(...basePosition),
+        0.2
+      );
 
-  const s = hovered || isActive ? 1.2 : 1.0;
-  targetScale.current.set(s, s, s);
-  meshRef.current.scale.lerp(targetScale.current, 0.15);
-});
+      meshRef.current.rotation.z = THREE.MathUtils.lerp(
+        meshRef.current.rotation.z,
+        0,
+        0.2
+      );
+    }
+
+    const s = hovered || isActive ? 1.2 : 1.0;
+    targetScale.current.set(s, s, s);
+    meshRef.current.scale.lerp(targetScale.current, 0.15);
+  });
+
 
   return (
     <group
