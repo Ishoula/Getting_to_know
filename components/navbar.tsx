@@ -20,8 +20,8 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="relative z-50 mx-auto mt-6 mb-4 w-[95%] max-w-[1400px] rounded-3xl border border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-sm transition-all duration-300">
+      <nav className="container mx-auto flex h-20 items-center justify-between px-8">
         <Link
           href="/"
           className="text-xl font-bold tracking-tight hover:opacity-80 transition-all duration-300 hover:scale-105"
@@ -30,7 +30,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link, index) => (
             <Link
               key={link.href}
@@ -84,11 +84,11 @@ export function Navbar() {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          "md:hidden border-b border-border/40 bg-background overflow-hidden transition-all duration-300 ease-in-out",
-          mobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0 border-b-0"
+          "md:hidden bg-background overflow-hidden transition-all duration-300 ease-in-out rounded-b-3xl",
+          mobileMenuOpen ? "max-h-64 opacity-100 border-t border-border/40" : "max-h-0 opacity-0"
         )}
       >
-        <div className="container mx-auto px-4 py-4 flex flex-col gap-2">
+        <div className="container mx-auto px-6 py-6 flex flex-col gap-2">
           {navLinks.map((link, index) => (
             <Link
               key={link.href}
