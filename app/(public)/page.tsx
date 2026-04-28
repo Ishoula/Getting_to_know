@@ -235,7 +235,20 @@ export default function HomePage() {
           </div>
         )}
 
+        <div className="mt-16 flex flex-col items-center gap-6">
+          <div className="h-px w-16 bg-primary/20" />
+          <div className="text-center space-y-4">
+            <p className="text-muted-foreground font-medium">Interested in my professional background?</p>
+            <Button size="lg" asChild className="rounded-full px-10 h-14 shadow-xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 group">
+              <Link href="/resume">
+                Check My Resume
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1.5 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </div>
       </section>
+
 
 
       {/* TECH STACK (3D TREE) */}

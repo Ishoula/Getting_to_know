@@ -2,8 +2,11 @@ import { Metadata } from "next/types";
 import { connectToDatabase } from "@/lib/db";
 import Project from "@/models/Project";
 import ContactMessage from "@/models/ContactMessage";
+import Recommendation from "@/models/Recommendation";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { FolderKanban, Mail, MailOpen, Clock } from "lucide-react";
+import { FolderKanban, Mail, MailOpen, Clock, Star } from "lucide-react";
+
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -15,11 +18,13 @@ async function getStats() {
   try {
     await connectToDatabase();
 
-    const [projectCount, messageCount, unreadCount] = await Promise.all([
+    const [projectCount, messageCount, unreadCount, recCount] = await Promise.all([
       Project.countDocuments(),
       ContactMessage.countDocuments(),
       ContactMessage.countDocuments({ read: false }),
+      Recommendation.countDocuments(),
     ]);
+
 
     const recentMessages = await ContactMessage.find({})
       .sort({ createdAt: -1 })
@@ -30,21 +35,26 @@ async function getStats() {
       projectCount,
       messageCount,
       unreadCount,
+      recCount,
       recentMessages: JSON.parse(JSON.stringify(recentMessages)),
     };
+
   } catch (error) {
     console.error("Error fetching stats:", error);
     return {
       projectCount: 0,
       messageCount: 0,
       unreadCount: 0,
+      recCount: 0,
       recentMessages: [],
     };
+
   }
 }
 
 export default async function DashboardPage() {
-  const { projectCount, messageCount, unreadCount, recentMessages } = await getStats();
+  const { projectCount, messageCount, unreadCount, recCount, recentMessages } = await getStats();
+
 
   return (
     <div className="space-y-8">
@@ -56,7 +66,8 @@ export default async function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
@@ -99,7 +110,23 @@ export default async function DashboardPage() {
             </p>
           </CardContent>
         </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">Recommendations</CardTitle>
+            <Star className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{recCount}</div>
+            <p className="text-xs text-muted-foreground">
+              <Link href="/dashboard/recommendations" className="hover:underline">
+                Manage recommendations
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
       </div>
+
 
       {/* Recent Messages */}
       <Card>

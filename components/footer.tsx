@@ -5,13 +5,32 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-background/50 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
           {/* Brand & About */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold tracking-tight">Moi</h3>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Building impactful software solutions with a focus on clean code and exceptional user experience.
             </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Quick Links</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/" className="text-sm hover:text-primary transition-colors">Home</Link>
+              </li>
+              <li>
+                <Link href="/projects" className="text-sm hover:text-primary transition-colors">Projects</Link>
+              </li>
+              <li>
+                <Link href="/resume" className="text-sm hover:text-primary transition-colors">Resume</Link>
+              </li>
+              <li>
+                <Link href="/#contact" className="text-sm hover:text-primary transition-colors">Contact</Link>
+              </li>
+            </ul>
           </div>
 
           {/* Contact Information */}
