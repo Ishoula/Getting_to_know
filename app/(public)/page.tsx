@@ -11,6 +11,8 @@ import FloatingBubbles from "@/components/FloatingBubbles";
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { ContactForm } from "@/components/contact-form";
+import { ProjectCard } from "@/components/project-card";
+
 
 const TechTree = dynamic(() => import("@/components/TechTree"), {
   ssr: false,
@@ -36,6 +38,10 @@ export default function HomePage() {
   const [recSubmitting, setRecSubmitting] = useState(false);
   const [recSuccess, setRecSuccess] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+
+
 
   useEffect(() => {
     fetch("/api/recommendations")
@@ -58,7 +64,21 @@ export default function HomePage() {
           }
         ]);
       });
+
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(Array.isArray(data) ? data.slice(0, 3) : []);
+      })
+      .catch((err) => {
+        console.error("[Projects] fetch error:", err);
+      })
+      .finally(() => {
+        setLoadingProjects(false);
+      });
+
   }, []);
+
 
   useEffect(() => {
     const el = recSectionRef.current;
@@ -172,6 +192,50 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* RECENT PROJECTS SECTION */}
+      <section className="py-16 border-t border-border/40">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-4">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Recent Projects</h2>
+            <p className="text-muted-foreground">Some of my most recent work and contributions</p>
+          </div>
+          <Button variant="outline" asChild className="group">
+            <Link href="/projects">
+              View All Projects
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition" />
+            </Link>
+          </Button>
+        </div>
+
+        {loadingProjects ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-[400px] rounded-lg bg-muted animate-pulse" />
+            ))}
+          </div>
+        ) : projects.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project._id}
+                title={project.title}
+                description={project.description}
+                techStack={project.techStack}
+                githubUrl={project.githubUrl}
+                liveUrl={project.liveUrl}
+                image={project.image}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-card rounded-lg border border-dashed">
+            <p className="text-muted-foreground">Check back soon for new projects!</p>
+          </div>
+        )}
+
+      </section>
+
 
       {/* TECH STACK (3D TREE) */}
       {/* TECH STACK (3D TREE) */}
