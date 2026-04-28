@@ -1,13 +1,12 @@
-import { Metadata } from "next";
+"use client";
+
 import { Button } from "@/components/ui/button";
+
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award } from "lucide-react";
+import { Download, Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award, Github } from "lucide-react";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Resume | Ishoula",
-  description: "My professional experience, education, and skills.",
-};
+
 
 export default function ResumePage() {
   const experiences = [
@@ -60,16 +59,25 @@ export default function ResumePage() {
               <Phone className="h-4 w-4" />
               +250 798 482 836
             </span>
+            <a href="https://github.com/Ishoula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <Github className="h-4 w-4" />
+              github.com/Ishoula
+            </a>
             <span className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               Kigali, Rwanda
             </span>
           </div>
         </div>
-        <Button className="rounded-full shadow-xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group animate-fade-slide-up" style={{ animationDelay: "200ms" }}>
+        <Button 
+          onClick={() => window.print()}
+          className="rounded-full shadow-xl hover:shadow-primary/20 transition-all duration-300 hover:scale-105 group animate-fade-slide-up print:hidden" 
+          style={{ animationDelay: "200ms" }}
+        >
           <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
-          Download Resume
+          Download PDF
         </Button>
+
       </div>
 
       <div className="grid gap-16">
