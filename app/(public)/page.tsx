@@ -51,7 +51,7 @@ export default async function HomePage() {
               asChild
               className="group hover:scale-105 transition"
             >
-              <Link href="/projects">
+              <Link href="/#projects">
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition" />
               </Link>
@@ -97,7 +97,7 @@ export default async function HomePage() {
       </section>
 
       {/* RECENT PROJECTS SECTION */}
-      <section className="py-16 border-t border-border/40">
+      <section className="py-16 border-t border-border/40" id="projects">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-4">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-2">Recent Projects</h2>
