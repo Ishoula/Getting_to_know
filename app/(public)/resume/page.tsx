@@ -126,7 +126,7 @@ export default function ResumePage() {
             </div>
             <h2 className="text-2xl font-bold tracking-tight">Technical Skills</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             {skills.map((skillGroup, i) => (
               <div key={i} className="space-y-6 p-6 rounded-2xl bg-muted/30 border border-border/40">
                 <h3 className="font-bold text-primary uppercase text-xs tracking-widest">{skillGroup.category}</h3>
@@ -150,7 +150,7 @@ export default function ResumePage() {
             </div>
             <h2 className="text-2xl font-bold tracking-tight">Certifications</h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {[
               "Introduction to Programming using Python",
               "PicoCTF-Afrrica 2025 Certificate of Achievement",

@@ -39,21 +39,21 @@ export function ProjectCard({
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         )}
-        <CardHeader>
-          <CardTitle className="text-xl transition-colors duration-300 group-hover:text-primary">{title}</CardTitle>
-          <CardDescription className="line-clamp-2">{description}</CardDescription>
+        <CardHeader className="p-4 md:p-6">
+          <CardTitle className="text-lg md:text-xl transition-colors duration-300 group-hover:text-primary">{title}</CardTitle>
+          <CardDescription className="text-xs md:text-sm line-clamp-2">{description}</CardDescription>
         </CardHeader>
-        <CardContent className="flex-1">
-          <div className="flex flex-wrap gap-2">
+        <CardContent className="p-4 md:p-6 pt-0 md:pt-0 flex-1">
+          <div className="flex flex-wrap gap-1.5 md:gap-2">
             {techStack.map((tech) => (
-              <Badge key={tech} variant="secondary" className="transition-all duration-300 hover:scale-105 hover:bg-primary hover:text-primary-foreground">
+              <Badge key={tech} variant="secondary" className="text-[10px] md:text-xs transition-all duration-300 hover:scale-105 hover:bg-primary hover:text-primary-foreground">
                 {tech}
               </Badge>
             ))}
           </div>
         </CardContent>
       </Link>
-      <CardFooter className="gap-2">
+      <CardFooter className="p-4 md:p-6 pt-0 md:pt-0 gap-2">
         {githubUrl && (
           <Button variant="outline" size="sm" asChild className="group/btn transition-all duration-300 hover:scale-105">
             <Link href={githubUrl} target="_blank" rel="noopener noreferrer">

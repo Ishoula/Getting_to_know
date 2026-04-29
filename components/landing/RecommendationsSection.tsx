@@ -87,7 +87,7 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
               {[...recommendations, ...recommendations].map((rec, i) => (
                 <Card
                   key={`${rec._id}-${i}`}
-                  className={`relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[320px] md:w-[380px] ${recVisible ? "animate-fadeSlideUp" : ""}`}
+                  className={`relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] ${recVisible ? "animate-fadeSlideUp" : ""}`}
                   style={{
                     animationDelay: `${Math.min(i, 8) * 120}ms`,
                   }}
@@ -97,20 +97,20 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
                       <Star className="h-5 w-5 fill-primary text-primary" />
                     </div>
                   )}
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-lg">
+                  <CardContent className="p-4 md:p-6">
+                    <div className="flex items-start gap-3 md:gap-4 mb-4">
+                      <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-semibold text-base md:text-lg">
                         {rec.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <h3 className="font-semibold">{rec.name}</h3>
-                        <p className="text-sm text-muted-foreground">{rec.role}</p>
-                        <p className="text-xs text-muted-foreground">{rec.company}</p>
+                        <h3 className="text-sm md:text-base font-semibold">{rec.name}</h3>
+                        <p className="text-xs text-muted-foreground">{rec.role}</p>
+                        <p className="text-[10px] md:text-xs text-muted-foreground">{rec.company}</p>
                       </div>
                     </div>
                     <div className="relative">
-                      <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/10" />
-                      <p className="text-sm leading-relaxed pl-4 pt-2 text-muted-foreground line-clamp-4">
+                      <Quote className="absolute -top-2 -left-2 h-6 w-6 md:h-8 md:w-8 text-primary/10" />
+                      <p className="text-xs md:text-sm leading-relaxed pl-4 pt-2 text-muted-foreground line-clamp-4">
                         {rec.testimonial}
                       </p>
                     </div>

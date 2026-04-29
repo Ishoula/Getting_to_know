@@ -179,7 +179,7 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
         </Card>
       )}
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         {initialRecommendations.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">

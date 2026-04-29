@@ -38,7 +38,7 @@ export default async function HomePage() {
           <p className="text-muted-foreground mb-4 animate-fade-in-up">
             Call Me
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 animate-fade-in-up">
             I.Shoula
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-up">
@@ -66,7 +66,7 @@ export default async function HomePage() {
       {/* WHAT I DO SECTION */}
       <section className="py-16 border-t border-border/40">
         <h2 className="text-2xl md:text-3xl font-bold mb-12">What I Do</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {[
             {
               icon: Globe,
@@ -86,11 +86,11 @@ export default async function HomePage() {
           ].map((item) => (
             <div
               key={item.title}
-              className="p-6 rounded-lg border border-border/40 bg-card hover:shadow-lg hover:-translate-y-1 transition"
+              className="p-4 md:p-6 rounded-lg border border-border/40 bg-card hover:shadow-lg hover:-translate-y-1 transition"
             >
-              <item.icon className="h-6 w-6 text-primary mb-4" />
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-sm">{item.desc}</p>
+              <item.icon className="h-5 w-5 md:h-6 md:w-6 text-primary mb-3 md:mb-4" />
+              <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">{item.title}</h3>
+              <p className="text-muted-foreground text-xs md:text-sm">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -111,7 +111,7 @@ export default async function HomePage() {
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {projects.length > 0 ? (
             projects.map((project: any) => (
               <ProjectCard

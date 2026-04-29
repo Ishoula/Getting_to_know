@@ -5,31 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Preload } from "@react-three/drei";
 import TechCard from "./TechCard";
 
-const treeData = [
-  { label: "Software Development", level: 0 },
-
-  { label: "Frontend", level: 1 },
-  { label: "Backend", level: 1 },
-  { label: "DevOps", level: 1 },
-
-  { label: "TypeScript", level: 2 },
-  { label: "Prisma", level: 2 },
-  { label: "Redis", level: 2 },
-  { label: "Jest", level: 2 },
-  { label: "GitHub Actions", level: 2 },
-  { label: "Kubernetes", level: 2 },
-
-  { label: "React", level: 3 },
-  { label: "Next.js", level: 3 },
-  { label: "Tailwind", level: 3 },
-
-  { label: "Node.js", level: 3 },
-  { label: "PostgreSQL", level: 3 },
-  { label: "GraphQL", level: 3 },
-
-  { label: "Docker", level: 3 },
-  { label: "AWS", level: 3 },
-];
+import { treeData } from "@/lib/constants";
 
 export default function TechTree() {
   return (
