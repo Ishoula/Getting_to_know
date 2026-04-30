@@ -77,63 +77,71 @@ export default async function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
-            <FolderKanban className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{projectCount}</div>
-            <p className="text-xs text-muted-foreground">
-              <Link href="/dashboard/projects" className="hover:underline">
-                Manage projects
-              </Link>
-            </p>
-          </CardContent>
-        </Card>
+        <Link href="/dashboard/projects">
+          <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
+              <FolderKanban className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{projectCount}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="hover:underline">
+                  Manage projects
+                </span>
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Messages</CardTitle>
-            <Mail className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{messageCount}</div>
-            <p className="text-xs text-muted-foreground">
-              <Link href="/dashboard/messages" className="hover:underline">
-                View all messages
-              </Link>
-            </p>
-          </CardContent>
-        </Card>
+        <Link href="/dashboard/messages">
+          <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Total Messages</CardTitle>
+              <Mail className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{messageCount}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="hover:underline">
+                  View all messages
+                </span>
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Unread Messages</CardTitle>
-            <MailOpen className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{unreadCount}</div>
-            <p className="text-xs text-muted-foreground">
-              {unreadCount > 0 ? "Requires attention" : "All caught up!"}
-            </p>
-          </CardContent>
-        </Card>
+        <Link href="/dashboard/messages">
+          <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Unread Messages</CardTitle>
+              <MailOpen className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{unreadCount}</div>
+              <p className="text-xs text-muted-foreground">
+                {unreadCount > 0 ? "Requires attention" : "All caught up!"}
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Recommendations</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{recCount}</div>
-            <p className="text-xs text-muted-foreground">
-              <Link href="/dashboard/recommendations" className="hover:underline">
-                Manage recommendations
-              </Link>
-            </p>
-          </CardContent>
-        </Card>
+        <Link href="/dashboard/recommendations">
+          <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Recommendations</CardTitle>
+              <Star className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{recCount}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="hover:underline">
+                  Manage recommendations
+                </span>
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
 
