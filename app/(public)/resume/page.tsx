@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award, Github } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { PrintButton } from "@/components/PrintButton";
 
 const experiences = [
@@ -9,7 +10,7 @@ const experiences = [
     title: "Data Analyst",
     company: "CodeAlpha",
     period: "2025",
-    description: "WOrked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
+    description: "Worked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
   },
   {
     title: "Data Analyst",
@@ -27,27 +28,35 @@ const experiences = [
 
 const education = [
   {
-    degree: "RWanda Coding Academy",
-    school: "University of Rwanda",
+    degree: "Software Programming Embedded Systems and Cyber Security",
+    school: "Rwanda Coding Academy",
     period: "2024-Present",
   },
 ];
 
 const skills = [
   { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
-  { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma", "SpringBoot"] },
-  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "Python",] },
-  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
+  { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma", "SpringBoot","Python"] },
+  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++","C"] },
+  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management","Data Structures","Algorithms","Figma"] },
 ];
 
 export default function ResumePage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8">
-        <div className="animate-fade-slide-up" style={{ animationDelay: "100ms" }}>
-          <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">Ishoula</h1>
-          <p className="text-xl text-primary font-medium">Full-Stack Developer</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sm text-muted-foreground">
+        <div className="animate-fade-slide-up flex flex-col md:flex-row gap-8 items-start md:items-center" style={{ animationDelay: "100ms" }}>
+          <Image 
+            src="/moii.png" 
+            alt="Ishoula Profile" 
+            width={240} 
+            height={240} 
+            className="rounded-full object-cover border-4 border-primary/20 w-32 h-32 md:w-56 md:h-56 lg:w-64 lg:h-64 shadow-lg"
+          />
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">Ishoula</h1>
+            <p className="text-xl text-primary font-medium">Full-Stack Developer</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sm text-muted-foreground">
             <a href="mailto:shoulamite2k@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="h-4 w-4" />
               shoulamite2k@gmail.com
@@ -64,6 +73,7 @@ export default function ResumePage() {
               <MapPin className="h-4 w-4" />
               Mussanze, Rwanda
             </span>
+          </div>
           </div>
         </div>
         <PrintButton />
