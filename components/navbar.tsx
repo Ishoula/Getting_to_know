@@ -20,8 +20,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-50 mx-auto mt-6 mb-4 w-[95%] max-w-[1400px] rounded-3xl border border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-sm transition-all duration-300">
-      <nav className="container mx-auto flex h-20 items-center justify-between px-8">
+<header className="sticky top-4 z-50 mx-auto mt-6 mb-4 w-[95%] max-w-[1400px] rounded-3xl border border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 shadow-sm transition-all duration-300">      <nav className="container mx-auto flex h-20 items-center justify-between px-8">
         <Link
           href="/"
           className="text-xl font-bold tracking-tight hover:opacity-80 transition-all duration-300 hover:scale-105"
