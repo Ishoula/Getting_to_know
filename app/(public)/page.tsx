@@ -12,7 +12,6 @@ import Project from "@/models/Project";
 import Recommendation from "@/models/Recommendation";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
-import { TerminalWrapper } from "@/components/terminal/TerminalWrapper";
 async function getData() {
   try {
     await connectToDatabase();
@@ -189,7 +188,7 @@ export default async function HomePage() {
       {/* FAQ */}
       <FAQSection />
      
-     <TerminalWrapper/>
+     
       <ScrollToTopButton />
     </div>
   );
