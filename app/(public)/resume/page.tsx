@@ -37,8 +37,8 @@ const education = [
 const skills = [
   { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
   { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma", "SpringBoot","Python"] },
-  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++","C"] },
-  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management","Data Structures","Algorithms","Figma"] },
+  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++","C","Twilio","Posthog","Deepgram","Figma","Blender"] },
+  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management","Data Structures","Algorithms","UI/UX Design"] },
 ];
 
 export default function ResumePage() {
