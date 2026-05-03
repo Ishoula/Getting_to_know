@@ -162,12 +162,12 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="rec-company">Company *</Label>
+                    <Label htmlFor="rec-company">Company </Label>
                     <Input
                       id="rec-company"
                       value={recForm.company}
                       onChange={(e) => setRecForm({ ...recForm, company: e.target.value })}
-                      required
+                      
                     />
                   </div>
                   <div className="space-y-2">

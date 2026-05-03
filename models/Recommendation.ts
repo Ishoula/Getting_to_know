@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export interface IRecommendation extends Document {
   name: string;
   role: string;
-  company: string;
+  company?: string;
   testimonial: string;
   avatar?: string;
   featured: boolean;
@@ -28,7 +28,7 @@ const RecommendationSchema = new Schema<IRecommendation>(
     },
     company: {
       type: String,
-      required: [true, "Company is required"],
+      required: false,
       trim: true,
       maxlength: [100, "Company cannot exceed 100 characters"],
     },

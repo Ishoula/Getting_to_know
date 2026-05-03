@@ -15,7 +15,7 @@ interface Recommendation {
   _id: string;
   name: string;
   role: string;
-  company: string;
+  company?: string;
   testimonial: string;
   avatar?: string;
   featured: boolean;
@@ -147,12 +147,11 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="company">Company *</Label>
+                <Label htmlFor="company">Company <span className="text-muted-foreground text-xs">(optional)</span></Label>
                 <Input
                   id="company"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  required
                 />
               </div>
               <div className="space-y-2">
@@ -217,7 +216,7 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
                           )}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {rec.role} • {rec.company}
+                          {rec.role}{rec.company ? ` • ${rec.company}` : ""}
                         </p>
                       </div>
                     </div>
