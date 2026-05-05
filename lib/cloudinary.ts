@@ -38,15 +38,18 @@ function ensureConfig() {
   cloudinary.config({
     ...config,
     secure: true,
+    timeout: 60000, // 60 seconds
   });
 
   console.log("[Cloudinary] Configured for cloud:", config.cloud_name);
   configured = true;
 }
+
 export async function uploadImageToCloudinary(file: File) {
   ensureConfig();
 
   const buffer = Buffer.from(await file.arrayBuffer());
+  console.log(`[Cloudinary] Uploading file: ${file.name} (${(buffer.length / 1024).toFixed(2)} KB)`);
 
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(

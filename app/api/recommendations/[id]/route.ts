@@ -5,8 +5,8 @@ import { auth } from "@/lib/auth";
 
 export const maxDuration = 60;
 
-// PATCH approve/reject recommendation (protected)
-export async function PATCH(
+// PUT approve/reject recommendation (protected)
+export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
@@ -40,10 +40,10 @@ export async function PATCH(
     }
 
     return NextResponse.json(recommendation);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error updating recommendation:", error);
     return NextResponse.json(
-      { error: "Failed to update recommendation" },
+      { error: error.message || "Failed to update recommendation" },
       { status: 500 }
     );
   }

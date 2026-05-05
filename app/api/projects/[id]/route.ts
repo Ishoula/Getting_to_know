@@ -56,8 +56,8 @@ export async function PUT(
     }
 
     const body = {
-      title: formData.get("title"),
-      description: formData.get("description"),
+      title: formData.get("title")?.toString() || "",
+      description: formData.get("description")?.toString() || "",
       techStack: (() => {
         const raw = formData.get("techStack");
         if (typeof raw !== "string") return [];
@@ -68,8 +68,8 @@ export async function PUT(
           return [];
         }
       })(),
-      githubUrl: formData.get("githubUrl"),
-      liveUrl: formData.get("liveUrl"),
+      githubUrl: formData.get("githubUrl")?.toString() || "",
+      liveUrl: formData.get("liveUrl")?.toString() || "",
       image: imageUrl,
       featured: formData.get("featured") === "true",
     };
@@ -87,16 +87,25 @@ export async function PUT(
     }
 
     return NextResponse.json(project);
-  } catch (error) {
-    if (error instanceof Error && error.name === "ZodError") {
+  } catch (error: any) {
+    console.error("Error updating project:", error);
+    
+    if (error.name === "ZodError") {
       return NextResponse.json(
-        { error: "Validation failed", details: error },
+        { error: "Validation failed", details: error.errors },
         { status: 400 }
       );
     }
-    console.error("Error updating project:", error);
+
+    if (error.name === "ValidationError") {
+      return NextResponse.json(
+        { error: "Database validation failed", details: error.errors },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { error: "Failed to update project" },
+      { error: error.message || "Failed to update project" },
       { status: 500 }
     );
   }

@@ -80,7 +80,7 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
   const handleApproval = async (id: string, approved: boolean) => {
     try {
       const res = await fetch(`/api/recommendations/${id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ approved }),
       });

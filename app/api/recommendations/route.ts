@@ -30,9 +30,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { name, role, company, testimonial } = body;
 
-    if (!name || !role || !company || !testimonial) {
+    if (!name || !role  || !testimonial) {
       return NextResponse.json(
-        { error: "Name, role, company, and testimonial are required" },
+        { error: "Name, role, and testimonial are required" },
         { status: 400 }
       );
     }

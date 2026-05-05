@@ -3,8 +3,8 @@ import { connectToDatabase } from "@/lib/db";
 import ContactMessage from "@/models/ContactMessage";
 import { auth } from "@/lib/auth";
 
-// PATCH mark message as read (protected)
-export async function PATCH(
+// PUT mark message as read (protected)
+export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
@@ -30,10 +30,10 @@ export async function PATCH(
     }
 
     return NextResponse.json(message);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error updating message:", error);
     return NextResponse.json(
-      { error: "Failed to update message" },
+      { error: error.message || "Failed to update message" },
       { status: 500 }
     );
   }

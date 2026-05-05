@@ -55,7 +55,7 @@ export function MessagesTable({ messages }: MessagesTableProps) {
 
     try {
       await fetch(`/api/contact/${message._id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
