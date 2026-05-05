@@ -12,6 +12,7 @@ import Project from "@/models/Project";
 import Recommendation from "@/models/Recommendation";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
+import IdentityBubble from "@/components/identity-bubble/IdentitiyBubble";
 async function getData() {
   try {
     await connectToDatabase();
@@ -190,6 +191,7 @@ export default async function HomePage() {
      
      
       <ScrollToTopButton />
+      <IdentityBubble/>
     </div>
   );
 }
