@@ -25,7 +25,7 @@ export function ProjectCard({
   image,
 }: ProjectCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-2 hover:border-primary/30">
+    <Card className="flex flex-col overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:border-primary/30 shadow-none">
       <Link href={`/projects/${id}`} className="flex flex-col flex-1">
         {image && (
           <div className="relative h-48 w-full bg-muted overflow-hidden">

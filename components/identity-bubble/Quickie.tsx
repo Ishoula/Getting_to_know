@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, MessageCircle, Mail, X, Star, Focus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MessageCircle, Mail, X, Star, Focus, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 
 const SECTIONS = [
@@ -55,15 +56,32 @@ const SECTIONS = [
     id: 'projects',
     title: 'PROJECTS',
     content: (
-      <div className="space-y-2 sm:space-y-4">
-        <div className="border-l-[3px] sm:border-l-4 border-foreground pl-3 sm:pl-4 py-0.5">
-          <h3 className="font-bold text-foreground text-xs sm:text-lg md:text-xl">PesaTracker</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">A premium financial ecosystem with glassmorphism and real-time analytics.</p>
+      <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-[400px] mx-auto">
+        <div className="group/item relative bg-background border-2 border-foreground p-2 sm:p-3 rounded-xl transition-all text-left hover:border-primary/50">
+          <div className="flex justify-between items-start">
+            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">PesaTracker</h3>
+            <span className="text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 bg-foreground text-background rounded">LIVE</span>
+          </div>
+          <p className="text-[9px] sm:text-[11px] md:text-[13px] text-foreground/80 mt-1 line-clamp-2 tracking-wide">
+            Financial ecosystem with glassmorphism & real-time analytics.
+          </p>
         </div>
-        <div className="border-l-[3px] sm:border-l-4 border-foreground pl-3 sm:pl-4 py-0.5">
-          <h3 className="font-bold text-foreground text-xs sm:text-lg md:text-xl">Interactive Portfolio</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Modern 3D showcase built with Next.js, Three.js and Framer Motion.</p>
+        <div className="group/item relative bg-background border-2 border-foreground p-2 sm:p-3 rounded-xl transition-all text-left hover:border-primary/50">
+          <div className="flex justify-between items-start">
+            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">Interactive Portfolio</h3>
+            <span className="text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 border-2 border-foreground rounded">WIP</span>
+          </div>
+          <p className="text-[9px] sm:text-[11px] md:text-[13px] text-foreground/80 mt-1 line-clamp-2 tracking-wide">
+            Modern 3D showcase built with Next.js & Framer Motion.
+          </p>
         </div>
+        <Link 
+          href="/projects" 
+          className="mt-2 text-[10px] sm:text-xs font-black uppercase tracking-widest text-foreground hover:text-primary transition-colors flex items-center justify-center gap-2 group/link"
+        >
+          View All Projects
+          <ChevronRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+        </Link>
       </div>
     ),
     tagline: "From concept to reality"
@@ -116,7 +134,7 @@ function SectionTitleBadge({ title }: { title: string }) {
   return (
     <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
       <div className="inline-flex items-center justify-center bg-card border-[4px] sm:border-[6px] md:border-[7px] border-foreground px-6 sm:px-12 md:px-20 py-1 sm:py-3 md:py-4 rounded-[60px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.35)]">
-        <h1 className="text-lg sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-[-1px] sm:tracking-[-2px] text-foreground">
+        <h1 className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-foreground">
           {title}
         </h1>
       </div>
@@ -233,7 +251,7 @@ export default function Quickie() {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="relative w-full max-w-3xl mx-auto pointer-events-none"
             >
-              <div className="animate-subtle-float relative pointer-events-auto scale-[0.5] xs:scale-[0.6] sm:scale-[0.7] md:scale-[0.8] lg:scale-[0.85]">
+              <div className="animate-subtle-float relative pointer-events-auto scale-[0.5] xs:scale-[0.6] sm:scale-[0.7] md:scale-[0.8] lg:scale-[0.85] transform-gpu antialiased subpixel-antialiased">
                 
                 {/* Responsive SVG Speech Bubble */}
                 <svg 
