@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight ,MessageCircle, Mail} from 'lucide-react';
 
 const SECTIONS = [
   {
@@ -24,8 +24,7 @@ const SECTIONS = [
     ),
     tagline: (
       <>
-        I build with intention, analyze with depth,<br className="hidden sm:block" />
-        and learn without limits.
+        Developer. Builder. Problem Solver
       </>
     )
   },
@@ -35,41 +34,37 @@ const SECTIONS = [
     content: (
       <div className="grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-x-8 sm:gap-y-4 text-left">
         <div>
-          <h3 className="font-bold text-black border-b-2 border-black/10 mb-0.5 sm:mb-1">Frontend</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Next.js, React, TypeScript, Tailwind CSS</p>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Frontend & Mobile</h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Next.js, React, TypeScript, Tailwind CSS, React Native</p>
         </div>
         <div>
-          <h3 className="font-bold text-black border-b-2 border-black/10 mb-0.5 sm:mb-1">Backend</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Node.js, PostgreSQL, GraphQL, Prisma, Redis</p>
-        </div>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Backend</h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Node.js, PostgreSQL, REST, Prisma,Java, Spring Boot,Python, MongoDB, PostgreSQL, SQLite</p>
+        </div> 
         <div>
-          <h3 className="font-bold text-black border-b-2 border-black/10 mb-0.5 sm:mb-1">DevOps</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Docker, AWS, Kubernetes, CI/CD</p>
-        </div>
-        <div>
-          <h3 className="font-bold text-black border-b-2 border-black/10 mb-0.5 sm:mb-1">Core</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">System Design, Security, Data Analysis</p>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Others</h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Data Structures and Algorithms, Git, Embedded Systems, C++, C, Google sheets, Ms Excel, Python, Canva , Figma, Blender</p>
         </div>
       </div>
     ),
-    tagline: "Mastering the stack from pixels to production."
+    tagline: "What I bring to the table"
   },
   {
     id: 'projects',
     title: 'PROJECTS',
     content: (
       <div className="space-y-2 sm:space-y-4">
-        <div className="border-l-[3px] sm:border-l-4 border-black pl-3 sm:pl-4 py-0.5">
-          <h3 className="font-bold text-black text-xs sm:text-lg md:text-xl">PesaTracker</h3>
+        <div className="border-l-[3px] sm:border-l-4 border-foreground pl-3 sm:pl-4 py-0.5">
+          <h3 className="font-bold text-foreground text-xs sm:text-lg md:text-xl">PesaTracker</h3>
           <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">A premium financial ecosystem with glassmorphism and real-time analytics.</p>
         </div>
-        <div className="border-l-[3px] sm:border-l-4 border-black pl-3 sm:pl-4 py-0.5">
-          <h3 className="font-bold text-black text-xs sm:text-lg md:text-xl">Interactive Portfolio</h3>
+        <div className="border-l-[3px] sm:border-l-4 border-foreground pl-3 sm:pl-4 py-0.5">
+          <h3 className="font-bold text-foreground text-xs sm:text-lg md:text-xl">Interactive Portfolio</h3>
           <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Modern 3D showcase built with Next.js, Three.js and Framer Motion.</p>
         </div>
       </div>
     ),
-    tagline: "Turning complex problems into elegant, functional reality."
+    tagline: "From concept to reality"
   },
   {
     id: 'contact',
@@ -80,17 +75,52 @@ const SECTIONS = [
           Looking for a developer who thinks like an investigator and builds like an architect?
           Let&apos;s talk about your next project.
         </p>
-        <button
-          onClick={() => window.location.href = '#contact'}
-          className="bg-black text-white px-5 sm:px-8 py-1.5 sm:py-3 rounded-full font-bold text-xs sm:text-base hover:scale-105 transition-transform shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)]"
-        >
-          GET IN TOUCH
-        </button>
+        <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Contact</h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="mailto:shoulamite2k@gmail.com"
+                  className="group flex items-center gap-3 text-sm hover:text-primary transition-colors"
+                >
+                  <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <span>shoulamite2k@gmail.com</span>
+                </a>
+              </li>
+             <li>
+                <a
+                  href="https://wa.me/+250798482836"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 text-sm hover:text-green-500 transition-colors"
+                >
+                  <div className="p-2 rounded-full bg-green-500/10 group-hover:bg-green-500/20 transition-colors">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
+                  <span>+250 798 482 836</span>
+                </a>
+              </li>
+            </ul>
+          </div>
       </div>
     ),
     tagline: "Open for collaborations, challenges, and coffee."
   }
 ];
+
+function SectionTitleBadge({ title }: { title: string }) {
+  return (
+    <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
+      <div className="inline-flex items-center justify-center bg-card border-[4px] sm:border-[6px] md:border-[7px] border-foreground px-6 sm:px-12 md:px-20 py-1 sm:py-3 md:py-4 rounded-[60px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.35)]">
+        <h1 className="text-lg sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-[-1px] sm:tracking-[-2px] text-foreground">
+          {title}
+        </h1>
+      </div>
+    </div>
+  );
+}
 
 export default function Quickie() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -156,37 +186,36 @@ export default function Quickie() {
                  Q100 560 70 420 
                  Q50 320 70 200 
                  Q60 130 90 90 Z"
-              fill="white"
-              stroke="#111111"
+              className="fill-card stroke-foreground"
               strokeWidth="12"
             />
 
             {/* Bottom Bubbles */}
-            <circle cx="110" cy="578" r="40" fill="white" stroke="#111111" strokeWidth="10"/>
-            <circle cx="55" cy="600" r="28" fill="white" stroke="#111111" strokeWidth="10"/>
-            <circle cx="28" cy="622" r="15" fill="white" stroke="#111111" strokeWidth="10"/>
+            <circle cx="110" cy="578" r="40" className="fill-card stroke-foreground" strokeWidth="10"/>
+            <circle cx="55" cy="600" r="28" className="fill-card stroke-foreground" strokeWidth="10"/>
+            <circle cx="28" cy="622" r="15" className="fill-card stroke-foreground" strokeWidth="10"/>
           </svg>
 
           {/* Navigation Arrows - Absolute Overlay */}
           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 sm:px-4 z-30 pointer-events-none">
             <button
               onClick={prevSection}
-              className="pointer-events-auto p-2 sm:p-4 bg-white border-[4px] sm:border-[6px] border-black rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer group active:scale-95"
+              className="pointer-events-auto p-2 sm:p-4 bg-card border-[4px] sm:border-[6px] border-foreground rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.35)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.35)] transition-all cursor-pointer group active:scale-95"
               aria-label="Previous section"
             >
-              <ChevronLeft size={32} className="text-black group-hover:scale-110 transition-transform w-5 h-5 sm:w-8 sm:h-8" />
+              <ChevronLeft size={32} className="text-foreground group-hover:scale-110 transition-transform w-5 h-5 sm:w-8 sm:h-8" />
             </button>
             <button
               onClick={nextSection}
-              className="pointer-events-auto p-2 sm:p-4 bg-white border-[4px] sm:border-[6px] border-black rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer group active:scale-95"
+              className="pointer-events-auto p-2 sm:p-4 bg-card border-[4px] sm:border-[6px] border-foreground rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.35)] hover:translate-x-[2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.35)] transition-all cursor-pointer group active:scale-95"
               aria-label="Next section"
             >
-              <ChevronRight size={32} className="text-black group-hover:scale-110 transition-transform w-5 h-5 sm:w-8 sm:h-8" />
+              <ChevronRight size={32} className="text-foreground group-hover:scale-110 transition-transform w-5 h-5 sm:w-8 sm:h-8" />
             </button>
           </div>
 
           {/* Content Overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-10 sm:px-14 md:px-20 py-8 text-center -translate-y-4 sm:translate-y-[-25px] md:translate-y-[-10px]">
+          <div className="absolute inset-0 flex flex-col items-center justify-start px-10 sm:px-14 md:px-20 pt-10 sm:pt-12 md:pt-14 text-center -translate-y-2 sm:translate-y-[-8px] md:translate-y-[-4px]">
             
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -200,27 +229,20 @@ export default function Quickie() {
                   x: { type: "spring", stiffness: 300, damping: 30 },
                   opacity: { duration: 0.2 }
                 }}
-                className="flex flex-col items-center justify-center w-full"
+                className="relative flex flex-col items-center justify-start w-full"
               >
-                {/* Section Badge */}
-                <div className="mb-6 sm:mb-8 md:mb-10 -mt-2 sm:-mt-6">
-                  <div className="inline-block bg-white border-[4px] sm:border-[6px] md:border-[7px] border-black px-6 sm:px-12 md:px-20 py-1 sm:py-3 md:py-4 rounded-[60px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 cursor-default group">
-                    <h1 className="text-lg sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-[-1px] sm:tracking-[-2px] text-black group-hover:scale-105 transition-transform duration-300">
-                      {section.title}
-                    </h1>
-                  </div>
-                </div>
+                <SectionTitleBadge title={section.title} />
 
                 {/* Main Content Area */}
-                <div className="w-full max-w-[90%] sm:max-w-[85%] md:max-w-[520px] min-h-[140px] sm:min-h-[200px] flex items-center justify-center text-[10px] xs:text-[12px] sm:text-[14px] md:text-[16px] lg:text-[17.5px] leading-tight sm:leading-relaxed md:leading-[1.65] text-gray-800 px-2 sm:px-4">
+                <div className="w-full max-w-[90%] sm:max-w-[85%] md:max-w-[520px] min-h-[140px] sm:min-h-[200px] flex items-center justify-center text-[10px] xs:text-[12px] sm:text-[14px] md:text-[16px] lg:text-[17.5px] leading-tight sm:leading-relaxed md:leading-[1.65] text-foreground px-2 sm:px-4 mt-12 sm:mt-14 md:mt-16">
                   {section.content}
                 </div>
 
                 {/* Divider */}
-                <div className="w-20 sm:w-64 md:w-80 lg:w-96 h-px sm:h-0.5 bg-black my-4 sm:my-6 md:my-8" />
+                <div className="w-20 sm:w-64 md:w-80 lg:w-96 h-px sm:h-0.5 bg-foreground my-4 sm:my-6 md:my-8" />
 
                 {/* Tagline */}
-                <p className="text-[9px] xs:text-[11px] sm:text-[15px] md:text-lg lg:text-xl font-medium italic leading-tight max-w-[85%] sm:max-w-md text-black px-4 -mt-2 sm:-mt-3 md:-mt-4">
+                <p className="text-[9px] xs:text-[11px] sm:text-[15px] md:text-lg lg:text-xl font-medium italic leading-tight max-w-[85%] sm:max-w-md text-foreground px-4 -mt-2 sm:-mt-3 md:-mt-4">
                   {section.tagline}
                 </p>
 
@@ -233,8 +255,8 @@ export default function Quickie() {
                         setDirection(i > currentIndex ? 1 : -1);
                         setCurrentIndex(i);
                       }}
-                      className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full border-2 border-black transition-all duration-300 ${
-                        i === currentIndex ? 'bg-black scale-125' : 'bg-transparent hover:bg-black/20'
+                      className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full border-2 border-foreground transition-all duration-300 ${
+                        i === currentIndex ? 'bg-foreground border-foreground scale-125' : 'bg-transparent border-foreground hover:bg-foreground/20'
                       }`}
                       aria-label={`Go to section ${i + 1}`}
                     />
