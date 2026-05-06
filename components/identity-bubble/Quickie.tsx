@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, MessageCircle, Mail, X, Star, Focus, ExternalLink } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, MessageCircle, Mail, X, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -12,16 +12,19 @@ const SECTIONS = [
     id: 'intro',
     title: 'INTRO',
     content: (
-      <div className="space-y-2 sm:space-y-4 md:space-y-7">
-        <p>
-          I&apos;m Ishoula—a developer focused on building efficient, meaningful systems.
-          I work with JavaScript and databases, while exploring machine learning, data
-          analysis, and cybersecurity through forensics and reverse engineering.
+      <div className="mx-auto max-w-[44ch] space-y-3 text-center sm:space-y-4 md:space-y-5">
+        <p className="leading-relaxed">
+          <TypewriterText
+            text="I'm Ishoula—a developer focused on building efficient, meaningful systems. I work with JavaScript and databases, while exploring machine learning, data analysis, and cybersecurity through forensics and reverse engineering."
+            speed={15}
+          />
         </p>
-        <p className="hidden lg:block">
-          I approach tech as both a builder and an investigator—designing, analyzing,
-          and improving systems with purpose. I&apos;m driven by problem-solving, clean
-          architecture, and continuous learning.
+        <p className="hidden lg:block leading-relaxed">
+          <TypewriterText
+            text="I approach tech as both a builder and an investigator—designing, analyzing, and improving systems with purpose. I'm driven by problem-solving, clean architecture, and continuous learning."
+            delay={1400}
+            speed={15}
+          />
         </p>
       </div>
     ),
@@ -35,18 +38,42 @@ const SECTIONS = [
     id: 'skills',
     title: 'SKILLS',
     content: (
-      <div className="grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-x-8 sm:gap-y-4 text-left">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-3 sm:gap-x-8 sm:gap-y-4 text-left">
         <div>
-          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Frontend & Mobile</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Next.js, React, TypeScript, Tailwind CSS, React Native</p>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">
+            <TypewriterText text="Frontend & Mobile" speed={14} />
+          </h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base leading-snug">
+            <TypewriterText
+              text="Next.js, React, TypeScript, Tailwind CSS, React Native"
+              delay={250}
+              speed={11}
+            />
+          </p>
         </div>
         <div>
-          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Backend</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Node.js, PostgreSQL, REST, Prisma,Java, Spring Boot,Python, MongoDB, PostgreSQL, SQLite</p>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">
+            <TypewriterText text="Backend" delay={450} speed={14} />
+          </h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base leading-snug">
+            <TypewriterText
+              text="Node.js, PostgreSQL, REST, Prisma, Java, Spring Boot, Python, MongoDB, SQLite"
+              delay={700}
+              speed={10}
+            />
+          </p>
         </div> 
         <div>
-          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">Others</h3>
-          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base">Data Structures and Algorithms, Git, Embedded Systems, C++, C, Google sheets, Ms Excel, Python, Canva , Figma, Blender</p>
+          <h3 className="font-bold text-foreground border-b-2 border-foreground/10 mb-0.5 sm:mb-1">
+            <TypewriterText text="Others" delay={900} speed={14} />
+          </h3>
+          <p className="text-[9px] xs:text-[11px] sm:text-[13px] md:text-base leading-snug">
+            <TypewriterText
+              text="Data Structures and Algorithms, Git, Embedded Systems, C++, C, Google Sheets, MS Excel, Python, Canva, Figma, Blender"
+              delay={1150}
+              speed={9}
+            />
+          </p>
         </div>
       </div>
     ),
@@ -59,20 +86,32 @@ const SECTIONS = [
       <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-[400px] mx-auto">
         <div className="group/item relative bg-background border-2 border-foreground p-2 sm:p-3 rounded-xl transition-all text-left hover:border-primary/50">
           <div className="flex justify-between items-start">
-            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">PesaTracker</h3>
+            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">
+              <TypewriterText text="PesaTracker" speed={15} />
+            </h3>
             <span className="text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 bg-foreground text-background rounded">LIVE</span>
           </div>
           <p className="text-[9px] sm:text-[11px] md:text-[13px] text-foreground/80 mt-1 line-clamp-2 tracking-wide">
-            Financial ecosystem with glassmorphism & real-time analytics.
+            <TypewriterText
+              text="Financial ecosystem with glassmorphism & real-time analytics."
+              delay={250}
+              speed={11}
+            />
           </p>
         </div>
         <div className="group/item relative bg-background border-2 border-foreground p-2 sm:p-3 rounded-xl transition-all text-left hover:border-primary/50">
           <div className="flex justify-between items-start">
-            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">Interactive Portfolio</h3>
+            <h3 className="font-bold text-[11px] sm:text-sm md:text-base uppercase tracking-tight">
+              <TypewriterText text="Interactive Portfolio" delay={500} speed={15} />
+            </h3>
             <span className="text-[8px] sm:text-[10px] font-black px-1.5 py-0.5 border-2 border-foreground rounded">WIP</span>
           </div>
           <p className="text-[9px] sm:text-[11px] md:text-[13px] text-foreground/80 mt-1 line-clamp-2 tracking-wide">
-            Modern 3D showcase built with Next.js & Framer Motion.
+            <TypewriterText
+              text="Modern 3D showcase built with Next.js & Framer Motion."
+              delay={750}
+              speed={11}
+            />
           </p>
         </div>
         <Link 
@@ -92,8 +131,10 @@ const SECTIONS = [
     content: (
       <div className="space-y-3 sm:space-y-6 flex flex-col items-center">
         <p className="text-center max-w-[400px]">
-          Looking for a developer who thinks like an investigator and builds like an architect?
-          Let&apos;s talk about your next project.
+          <TypewriterText
+            text="Looking for a developer who thinks like an investigator and builds like an architect? Let's talk about your next project."
+            speed={15}
+          />
         </p>
         <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Contact</h4>
@@ -106,7 +147,9 @@ const SECTIONS = [
                   <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
                     <Mail className="h-4 w-4" />
                   </div>
-                  <span>shoulamite2k@gmail.com</span>
+                  <span>
+                    <TypewriterText text="shoulamite2k@gmail.com" delay={400} speed={13} />
+                  </span>
                 </a>
               </li>
              <li>
@@ -119,7 +162,9 @@ const SECTIONS = [
                   <div className="p-2 rounded-full bg-green-500/10 group-hover:bg-green-500/20 transition-colors">
                     <MessageCircle className="h-4 w-4" />
                   </div>
-                  <span>+250 798 482 836</span>
+                  <span>
+                    <TypewriterText text="+250 798 482 836" delay={650} speed={13} />
+                  </span>
                 </a>
               </li>
             </ul>
@@ -158,6 +203,62 @@ function StarFocusIcon({ className }: { className?: string }) {
       </div>
       <Star className="w-[60%] h-[60%] text-foreground fill-none stroke-[2px]" />
     </div>
+  );
+}
+
+type TypewriterTextProps = {
+  text: string;
+  className?: string;
+  delay?: number;
+  speed?: number;
+};
+
+function TypewriterText({
+  text,
+  className,
+  delay = 0,
+  speed = 18,
+}: TypewriterTextProps) {
+  const [displayed, setDisplayed] = useState('');
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setDisplayed(text);
+      return;
+    }
+
+    setDisplayed('');
+
+    let index = 0;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        index += 1;
+        setDisplayed(text.slice(0, index));
+
+        if (index >= text.length && interval) {
+          clearInterval(interval);
+        }
+      }, speed);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [delay, reduceMotion, speed, text]);
+
+  const done = displayed.length >= text.length;
+
+  return (
+    <span className={className}>
+      <span className="whitespace-pre-wrap">{displayed}</span>
+      {!reduceMotion && !done ? (
+        <span className="ml-0.5 inline-block animate-pulse align-baseline">|</span>
+      ) : null}
+    </span>
   );
 }
 
