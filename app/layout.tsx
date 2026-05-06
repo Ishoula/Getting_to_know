@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
     
-      <body className="font-sans antialiased bg-background">
+      <body className="font-sans antialiased bg-background relative isolate">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -41,7 +41,9 @@ export default function RootLayout({
         >
           <CustomCursor />
           <FloatingStars/>
-          {children}
+          <div className="relative z-10">
+            {children}
+          </div>
         </ThemeProvider>
 
 

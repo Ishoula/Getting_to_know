@@ -12,7 +12,7 @@ import Project from "@/models/Project";
 import Recommendation from "@/models/Recommendation";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
-import IntroBubble from "@/components/identity-bubble/IntroBubble";
+import Quickie from "@/components/identity-bubble/Quickie";
 async function getData() {
   try {
     await connectToDatabase();
@@ -191,7 +191,7 @@ export default async function HomePage() {
      
      
       <ScrollToTopButton />
-      <IntroBubble/>
+      <Quickie/>
     </div>
   );
 }
