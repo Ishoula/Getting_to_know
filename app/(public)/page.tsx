@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Code2, Database, Globe } from "lucide-react";
+import { ArrowRight, Code2, Database, Globe, Star } from "lucide-react";
 import Link from "next/link";
 
 import { ProjectCard } from "@/components/project-card";
@@ -62,6 +62,13 @@ export default async function HomePage() {
 
             <Button size="lg" variant="outline" asChild>
               <Link href="/#contact">Let’s Talk</Link>
+            </Button>
+
+            <Button size="lg" variant="secondary" asChild className="group">
+              <a href="/#quickie">
+                Quickie
+                <Star className="ml-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+              </a>
             </Button>
           </div>
         </div>
@@ -191,7 +198,9 @@ export default async function HomePage() {
      
      
       <ScrollToTopButton />
-      <Quickie/>
+      <div id="quickie" className="scroll-mt-24">
+        <Quickie />
+      </div>
     </div>
   );
 }

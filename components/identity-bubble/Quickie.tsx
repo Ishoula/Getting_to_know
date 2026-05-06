@@ -267,6 +267,52 @@ export default function Quickie() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
 
+  useEffect(() => {
+    const syncFromHash = () => {
+      const shouldOpen = window.location.hash === '#quickie';
+
+      setIsOpen(shouldOpen);
+
+      if (shouldOpen) {
+        setCurrentIndex(0);
+        setDirection(0);
+      }
+    };
+
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+
+    return () => {
+      window.removeEventListener('hashchange', syncFromHash);
+    };
+  }, []);
+
+  const openQuickie = () => {
+    setCurrentIndex(0);
+    setDirection(0);
+    setIsOpen(true);
+
+    if (window.location.hash !== '#quickie') {
+      window.history.pushState(
+        null,
+        '',
+        `${window.location.pathname}${window.location.search}#quickie`
+      );
+    }
+  };
+
+  const closeQuickie = () => {
+    setIsOpen(false);
+
+    if (window.location.hash === '#quickie') {
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${window.location.search}`
+      );
+    }
+  };
+
   const nextSection = () => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % SECTIONS.length);
@@ -306,7 +352,7 @@ export default function Quickie() {
     <>
       {/* Floating Trigger Button */}
       <motion.button
-        onClick={() => setIsOpen(true)}
+        onClick={openQuickie}
         initial={{ opacity: 0, scale: 0.5, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
@@ -328,13 +374,13 @@ export default function Quickie() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={closeQuickie}
               className="absolute inset-0 bg-background/80 backdrop-blur-md cursor-pointer"
             />
 
             {/* Close Button */}
             <motion.button
-              onClick={() => setIsOpen(false)}
+              onClick={closeQuickie}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
