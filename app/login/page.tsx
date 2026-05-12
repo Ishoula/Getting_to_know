@@ -20,7 +20,7 @@ export default function LoginPage() {
             href="/" 
             className="inline-block text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity"
           >
-            Portfolio
+            I.Shoula
           </Link>
         </div>
         
