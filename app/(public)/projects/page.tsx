@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { connectToDatabase } from "@/lib/db";
 import Project from "@/models/Project";
 import { ProjectCard } from "@/components/project-card";
+import ProjectList from "@/components/project-list";
 
 export const metadata: Metadata = {
   title: "Projects",
