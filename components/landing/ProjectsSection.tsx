@@ -21,6 +21,9 @@ interface ProjectsSectionProps {
   projects: Project[];
 }
 
+const formatCssNumber = (value: number) => Number(value.toFixed(6)).toString();
+const formatPx = (value: number) => `${formatCssNumber(value)}px`;
+
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [rotation, setRotation] = useState(0);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -162,21 +165,20 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           return (
             <div
               key={project._id}
-              className="absolute left-1/2 top-1/2"
+              className="absolute left-1/2 top-1/2 transition-opacity duration-700 ease-in-out"
               style={{
                 /**
                  * POSITION is driven entirely by RAF – no CSS transition here
                  * so the element tracks the animation without fighting it.
                  */
-                transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                zIndex: isHovered ? 50 : zIndex,
+                transform: `translate(-50%, -50%) translate(${formatPx(x)}, ${formatPx(y)})`,
+                zIndex: String(isHovered ? 50 : zIndex),
                 /**
                  * ENTRY FADE – one-shot, staggered per card.
                  * After isVisible is true the opacity stays 1, so the delay
                  * only fires once.
                  */
-                opacity: isVisible ? 1 : 0,
-                transition: "opacity 0.7s ease",
+                opacity: isVisible ? "1" : "0",
                 transitionDelay: isVisible ? `${index * 90}ms` : "0ms",
               }}
               onMouseEnter={() => handleMouseEnter(project._id)}
@@ -188,11 +190,10 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                * only competes with itself, not with the RAF-driven translate.
                */}
               <div
+                className="transition-[transform,opacity] duration-[450ms,350ms] ease-[cubic-bezier(0.34,1.56,0.64,1),ease]"
                 style={{
-                  transform: `scale(${isHovered ? 1.06 : depthScale})`,
-                  opacity: isHovered ? 1 : depthOpacity,
-                  transition:
-                    "transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease",
+                  transform: `scale(${formatCssNumber(isHovered ? 1.06 : depthScale)})`,
+                  opacity: formatCssNumber(isHovered ? 1 : depthOpacity),
                 }}
               >
                 <Link href={`/projects/${project._id}`} className="group block">
