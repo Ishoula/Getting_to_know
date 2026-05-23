@@ -12,6 +12,10 @@ import Recommendation from "@/models/Recommendation";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import Quickie from "@/components/identity-bubble/Quickie";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function getData() {
   try {
     await connectToDatabase();

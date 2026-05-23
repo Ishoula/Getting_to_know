@@ -4,6 +4,7 @@ import Project from "@/models/Project";
 import { projectSchema } from "@/lib/validations";
 import { auth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 // GET all projects (public)

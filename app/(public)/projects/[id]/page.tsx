@@ -8,6 +8,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface ProjectDetailsProps {
   params: Promise<{ id: string }>;
 }
