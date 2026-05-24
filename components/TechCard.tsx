@@ -41,7 +41,7 @@ export default function TechCard({
     return {
       card: isDark ? "#ffffff" : "#000000",
       text: isDark ? "#000000" : "#ffffff",
-      accent: "#3b82f6",
+      accent: "#2f2f2f",
     };
   }, [isDark]);
 

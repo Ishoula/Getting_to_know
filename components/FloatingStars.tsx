@@ -13,7 +13,7 @@ export default function FloatingStars() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const generated: Star[] = Array.from({ length: 50 }).map(() => ({
+    const generated: Star[] = Array.from({ length: 20 }).map(() => ({
       size: Math.random() * 8 + 4,
       left: Math.random() * 100,
       top: Math.random() * 100,

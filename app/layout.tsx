@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import FloatingStars from "@/components/FloatingStars";
 import { CustomCursor } from "@/components/custom-cursor";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -40,7 +39,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <CustomCursor />
-          <FloatingStars />
           <div className="relative z-10">
             {children}
           </div>
