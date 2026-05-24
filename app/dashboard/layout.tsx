@@ -15,10 +15,12 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative isolate">
       <FloatingStars />
       <DashboardNav user={session.user} />
-      <main className="container mx-auto px-4 py-8">{children}</main>
+      <main className="container mx-auto px-4 py-8 relative z-10">
+        {children}
+      </main>
     </div>
   );
 }

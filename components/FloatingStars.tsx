@@ -6,8 +6,6 @@ type Star = {
   size: number;
   left: number;
   top: number;
-  delay: number;
-  duration: number;
   opacity: number;
 };
 
@@ -19,8 +17,6 @@ export default function FloatingStars() {
       size: Math.random() * 8 + 4,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      delay: -(Math.random() * 18 + 2),
-      duration: Math.random() * 12 + 10,
       opacity: Math.random() * 0.35 + 0.55,
     }));
 
@@ -30,11 +26,11 @@ export default function FloatingStars() {
   if (stars.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 z-[15] pointer-events-none overflow-hidden text-black dark:text-white [--star-glow:rgba(0,0,0,0.22)] dark:[--star-glow:rgba(255,255,255,0.42)]">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden text-black dark:text-white [--star-glow:rgba(0,0,0,0.22)] dark:[--star-glow:rgba(255,255,255,0.42)]">
       {stars.map((s, i) => (
         <svg
           key={i}
-          className="absolute animate-floatBubble will-change-transform"
+          className="absolute"
           viewBox="0 0 24 24"
           aria-hidden="true"
           style={
@@ -44,8 +40,6 @@ export default function FloatingStars() {
               left: `${s.left}%`,
               top: `${s.top}%`,
               opacity: s.opacity,
-              animationDelay: `${s.delay}s`,
-              animationDuration: `${s.duration}s`,
               filter:
                 "drop-shadow(0 0 4px var(--star-glow)) drop-shadow(0 0 8px var(--star-glow))",
             } as CSSProperties & Record<string, string | number>
