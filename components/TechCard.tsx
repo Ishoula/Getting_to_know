@@ -11,7 +11,6 @@ interface TechCardProps {
   basePosition: [number, number, number];
   isActive: boolean;
   setHoveredTech: (val: string | null) => void;
-  isAnyHovered: boolean; // 👈 add this
   size?: {
     width: number;
     height: number;
@@ -25,7 +24,6 @@ export default function TechCard({
   basePosition,
   isActive,
   setHoveredTech,
-  isAnyHovered,
   size,
 }: TechCardProps) {
   const meshRef = useRef<THREE.Group>(null!);
@@ -47,56 +45,10 @@ export default function TechCard({
     };
   }, [isDark]);
 
-  // 🎲 Random motion config (stable per card)
-  const random = useMemo(() => ({
-    offsetX: Math.random() * 2 - 1,
-    offsetY: Math.random() * 2 - 1,
-    speed: 0.5 + Math.random() * 0.8,
-    amplitude: 0.2 + Math.random() * 0.3,
-    phase: Math.random() * Math.PI * 2,
-  }), []);
-
   const targetScale = useRef(new THREE.Vector3(1, 1, 1));
-  const timeRef = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (!meshRef.current) return;
-
-    timeRef.current += delta;
-    const t = timeRef.current;
-
-    // 🧲 STOP ALL motion if ANY card is hovered
-    if (!isAnyHovered) {
-      meshRef.current.position.x =
-        basePosition[0] +
-        Math.sin(t * random.speed + random.phase) *
-          random.amplitude *
-          random.offsetX;
-
-      meshRef.current.position.y =
-        basePosition[1] +
-        Math.cos(t * random.speed + random.phase) *
-          random.amplitude *
-          random.offsetY;
-
-      meshRef.current.position.z =
-        basePosition[2] +
-        Math.sin(t * random.speed) * 0.1;
-
-      meshRef.current.rotation.z =
-        Math.sin(t * random.speed) * 0.08;
-    } else {
-      meshRef.current.position.lerp(
-        new THREE.Vector3(...basePosition),
-        0.2
-      );
-
-      meshRef.current.rotation.z = THREE.MathUtils.lerp(
-        meshRef.current.rotation.z,
-        0,
-        0.2
-      );
-    }
 
     const s = hovered || isActive ? 1.2 : 1.0;
     targetScale.current.set(s, s, s);

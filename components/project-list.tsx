@@ -1,6 +1,6 @@
 "use client";
 
-import ProjectCard from "@/components/project-card";
+import { ProjectCard } from "@/components/project-card";
 import React, { useState, useEffect, useRef } from "react";
 
 interface Project {
@@ -16,8 +16,6 @@ interface Project {
 interface ProjectListProps {
   projects: Project[];
 }
-
-"use client";
 
 export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   const [displayCount, setDisplayCount] = useState(8);

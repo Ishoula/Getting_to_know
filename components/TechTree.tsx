@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { Preload } from "@react-three/drei";
 import TechCard from "./TechCard";
 
@@ -39,14 +39,6 @@ export default function TechTree() {
 
 function TechTreeContent() {
   const [activeTech, setActiveTech] = useState<string | null>(null);
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  const isAnyHovered = hoveredTech !== null;
-  const mouse = useRef({ x: 0, y: 0 }).current;
-
-  useFrame(({ mouse: m }) => {
-    mouse.x = m.x;
-    mouse.y = m.y;
-  });
 
   return (
     <>
@@ -92,8 +84,7 @@ function TechTreeContent() {
               label={tech.label}
               basePosition={[x, y, z]}
               isActive={activeTech === tech.label}
-              setHoveredTech={setHoveredTech}
-              isAnyHovered={isAnyHovered}
+              setHoveredTech={setActiveTech}
               size={
                 tech.level === 0
                   ? { width: 2.8, height: 0.7, depth: 0.18, fontSize: 0.22 }
