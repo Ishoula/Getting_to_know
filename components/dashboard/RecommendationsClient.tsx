@@ -1,13 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Trash2, Plus, Star, CheckCircle, XCircle, Clock } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Trash2,
+  Plus,
+  Star,
+  CheckCircle,
+  XCircle,
+  Clock,
+  Loader2,
+  AlertTriangle,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
@@ -24,6 +43,8 @@ interface Recommendation {
 
 export function RecommendationsClient({ initialRecommendations }: { initialRecommendations: Recommendation[] }) {
   const [recommendations, setRecommendations] = useState<Recommendation[]>(initialRecommendations);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -33,6 +54,11 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
     featured: false,
   });
   const router = useRouter();
+  const selectedRecommendation = recommendations.find((rec) => rec._id === deleteId);
+
+  useEffect(() => {
+    setRecommendations(initialRecommendations);
+  }, [initialRecommendations]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,15 +83,19 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this recommendation?")) return;
+  const handleDelete = async () => {
+    if (!deleteId) return;
 
+    setIsDeleting(true);
     try {
-      const res = await fetch(`/api/recommendations/${id}`, {
+      const res = await fetch(`/api/recommendations/${deleteId}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
+        setRecommendations((current) =>
+          current.filter((rec) => rec._id !== deleteId)
+        );
         toast.success("Recommendation deleted");
         router.refresh();
       } else {
@@ -74,6 +104,9 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
     } catch (error) {
       console.error("Error deleting recommendation:", error);
       toast.error("Failed to delete recommendation");
+    } finally {
+      setIsDeleting(false);
+      setDeleteId(null);
     }
   };
 
@@ -98,7 +131,8 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Recommendations</h1>
@@ -179,7 +213,7 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
       )}
 
       <div className="grid gap-4 md:grid-cols-2">
-        {initialRecommendations.length === 0 ? (
+        {recommendations.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center justify-center py-12">
               <p className="text-muted-foreground mb-4">No recommendations yet</p>
@@ -190,7 +224,7 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
             </CardContent>
           </Card>
         ) : (
-          initialRecommendations.map((rec) => (
+          recommendations.map((rec) => (
             <Card key={rec._id} className={rec.approved ? "" : "border-amber-500/30"}>
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
@@ -244,8 +278,9 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleDelete(rec._id)}
+                      onClick={() => setDeleteId(rec._id)}
                       className="text-destructive hover:text-destructive"
+                      aria-label={`Delete recommendation from ${rec.name}`}
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -256,6 +291,44 @@ export function RecommendationsClient({ initialRecommendations }: { initialRecom
           ))
         )}
       </div>
-    </div>
+      </div>
+      <AlertDialog
+        open={!!deleteId}
+        onOpenChange={(open) => {
+          if (!open && !isDeleting) setDeleteId(null);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+              <AlertTriangle className="h-5 w-5" />
+            </div>
+            <AlertDialogTitle>Delete recommendation?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete
+              {selectedRecommendation ? ` ${selectedRecommendation.name}'s` : " this"} recommendation.
+              This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {isDeleting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Deleting...
+                </>
+              ) : (
+                "Delete"
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
