@@ -22,7 +22,7 @@ const experiences = [
     title: "Fullstack Developer",
     company: "Sunnet",
     period: "2026-Present",
-    description: "Worked as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
+    description: "Working as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
   },
 ];
 
@@ -36,10 +36,10 @@ const education = [
 
 const skills = [
   { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
-  { category: "Backend", items: ["Node.js", "Express", "MongoDB", "PostgreSQL", "Java", "Prisma", "SpringBoot", "Python"] },
+  { category: "Backend & Database", items: ["Node.js", "Express", "Java", "Prisma", "SpringBoot", "Python","Supabase", "MongoDB", "PostgreSQL","Neon","MySQL","SQLite"] },
   { category: "UI/UX & Design", items: ["Figma","Blender","Canva","PhotoShop"] },
-  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++", "C"] },
-  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management", "Data Structures", "Algorithms"] },
+  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++", "C","Data Structures", "Algorithms","Linux"] },
+  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
 ];
 
 export default function ResumePage() {
