@@ -35,10 +35,10 @@ const education = [
 ];
 
 const skills = [
-  { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
-  { category: "Backend & Database", items: ["Node.js", "Express", "Java", "Prisma", "SpringBoot", "Python","Supabase", "MongoDB", "PostgreSQL","Neon","MySQL","SQLite"] },
+  { category: "Frontend", items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
+  { category: "Backend & Database", items: ["Node.js", "Express", "Java", "Prisma", "SpringBoot", "Python","Next.js","Supabase", "MongoDB", "PostgreSQL","Neon","MySQL","SQLite"] },
   { category: "UI/UX & Design", items: ["Figma","Blender","Canva","PhotoShop"] },
-  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++", "C","Data Structures", "Algorithms","Linux"] },
+  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++", "C","Data Structures", "Algorithms","Linux","Blender"] },
   { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
 ];
 
