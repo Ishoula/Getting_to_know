@@ -1,30 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, ExternalLink, Briefcase, GraduationCap, Code2, Award, Github } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  Briefcase,
+  GraduationCap,
+  Code2,
+  Award,
+  Github,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PrintButton } from "@/components/PrintButton";
-
-const experiences = [
-  {
-    title: "Data Analyst",
-    company: "CodeAlpha",
-    period: "2025",
-    description: "WOrked on data analysis and visualization projects, leveraging languages like Python to transform raw data into actionable insights that informed business strategies.",
-  },
-  {
-    title: "Data Analyst",
-    company: "Sandai Global",
-    period: "2025-Present",
-    description: "Currently working as a data detective analyzing complex datasets to uncover insights that drove strategic decisions. Developed interactive dashboards and visualizations using Microsoft Excel, resulting in a 30% increase in data-driven decision-making across the organization.",
-  },
-  {
-    title: "Fullstack Developer",
-    company: "Sunnet",
-    period: "2026-Present",
-    description: "Working as a fullstack developer, building and maintaining mobile and web applications using technologies like React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software solutions that met client needs and enhanced user experience.",
-  },
-];
 
 const education = [
   {
@@ -34,19 +23,122 @@ const education = [
   },
 ];
 
+const experiences = [
+  {
+    title: "Software Engineering Projects",
+    company: "Independent & Academic Experience",
+    period: "2024-Present",
+    description:
+      "Built full-stack web and mobile applications using React.js, Next.js, React Native, Node.js, Express.js, and Spring Boot. Worked with REST APIs, PostgreSQL, MongoDB, authentication systems, and responsive UI/UX design across multiple real-world projects.",
+  },
+  {
+    title: "Backend Developer",
+    company: "RCA Hackathon Competition",
+    period: "2025",
+    description:
+      "Worked as a backend developer using Express.js to design and integrate RESTful APIs under hackathon time constraints. Collaborated with frontend developers to ensure smooth data flow, authentication, and feature integration.",
+  },
+];
+
 const skills = [
-  { category: "Frontend", items: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "React Native", "Framer Motion", "JSP"] },
-  { category: "Backend & Database", items: ["Node.js", "Express", "Java", "Prisma", "SpringBoot", "Python","Next.js","Supabase", "MongoDB", "PostgreSQL","Neon","MySQL","SQLite"] },
-  { category: "UI/UX & Design", items: ["Figma","Blender","Canva","PhotoShop"] },
-  { category: "Tools & Others", items: ["Git", " Ms.Excel", "Google Sheets", "Cloudinary", "C++", "C","Data Structures", "Algorithms","Linux","Blender"] },
-  { category: "Soft Skills", items: ["Problem Solving", "Communication", "Teamwork", "Adaptability", "Time Management"] },
+  {
+    category: "Frontend",
+    items: [
+      "React.js",
+      "Next.js",
+      "React Native",
+      "TypeScript",
+      "Tailwind CSS",
+      "Expo Router",
+      "shadcn/ui",
+    ],
+  },
+  {
+    category: "Backend & APIs",
+    items: [
+      "Node.js",
+      "Express.js",
+      "Spring Boot",
+      "REST APIs",
+      "JWT",
+      "Supabase",
+      "TypeORM",
+    ],
+  },
+  {
+    category: "Databases",
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Neon", "SQLite"],
+  },
+  {
+    category: "Languages",
+    items: ["JavaScript", "TypeScript", "Python", "Java", "C++", "C", "PHP"],
+  },
+  {
+    category: "Tools & Cloud",
+    items: [
+      "Git",
+      "GitHub",
+      "Cloudinary",
+      "Postman",
+      "Linux",
+      "Docker",
+      "Vercel",
+      "Redis",
+    ],
+  },
+  {
+    category: "Computer Science",
+    items: [
+      "Data Structures",
+      "Algorithms",
+      "Problem Solving",
+      "UI/UX Design",
+      "System Design",
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: "DevTrack",
+    tech: "Next.js, TypeScript, Supabase, PostgreSQL",
+    description:
+      "Developer productivity platform with GitHub tracking, Kanban management, analytics dashboards, and protected authentication flows.",
+  },
+  {
+    title: "Livora",
+    tech: "React Native, Express.js, PostgreSQL",
+    description:
+      "Cross-platform real estate application featuring property listings, messaging, authentication, and user profile management.",
+  },
+  {
+    title: "Smart Poultry App (PMSyst)",
+    tech: "React Native, Express.js, MongoDB",
+    description:
+      "Worked as a Mobile Developer building interfaces and integrating APIs for poultry farm management and growth tracking.",
+  },
+  {
+    title: "Mula",
+    tech: "React Native, Express.js, PostgreSQL",
+    description:
+      "Expense tracking application with Clerk authentication, PostgreSQL database integration, and Redis API rate limiting.",
+  },
+  {
+    title: "RecipeFlow",
+    tech: "React.js, Spring Boot, MySQL",
+    description:
+      "Recipe sharing platform with CRUD functionality, Cloudinary image management, and responsive UI design.",
+  },
 ];
 
 export default function ResumePage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8">
-        <div className="animate-fade-slide-up flex flex-col md:flex-row gap-8 items-start md:items-center" style={{ animationDelay: "100ms" }}>
+        <div
+          className="animate-fade-slide-up flex flex-col md:flex-row gap-8 items-start md:items-center"
+          style={{ animationDelay: "100ms" }}
+        >
           <Image
             src="/profile.jpg"
             alt="Ishoula Profile"
@@ -55,10 +147,17 @@ export default function ResumePage() {
             className="rounded-full object-cover border-4 border-primary/20 w-24 h-24 md:w-32 md:h-32 shadow-lg"
           />
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">Ishoula</h1>
-            <p className="text-xl text-primary font-medium">Full-Stack Developer</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">
+              Ishoula
+            </h1>
+            <p className="text-xl text-primary font-medium">
+              Full-Stack Developer
+            </p>
             <div className="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sm text-muted-foreground">
-              <a href="mailto:shoulamite2k@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a
+                href="mailto:shoulamite2k@gmail.com"
+                className="flex items-center gap-2 hover:text-primary transition-colors"
+              >
                 <Mail className="h-4 w-4" />
                 shoulamite2k@gmail.com
               </a>
@@ -66,7 +165,12 @@ export default function ResumePage() {
                 <Phone className="h-4 w-4" />
                 +250 798 482 836
               </span>
-              <a href="https://github.com/Ishoula" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a
+                href="https://github.com/Ishoula"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-primary transition-colors"
+              >
                 <Github className="h-4 w-4" />
                 github.com/Ishoula
               </a>
@@ -82,7 +186,10 @@ export default function ResumePage() {
 
       <div className="grid gap-16">
         {/* Experience */}
-        <section className="animate-fade-slide-up" style={{ animationDelay: "300ms" }}>
+        <section
+          className="animate-fade-slide-up"
+          style={{ animationDelay: "300ms" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
               <Briefcase className="h-6 w-6" />
@@ -91,21 +198,31 @@ export default function ResumePage() {
           </div>
           <div className="space-y-12">
             {experiences.map((exp, i) => (
-              <div key={i} className="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-border/60 hover:before:bg-primary/50 transition-colors">
+              <div
+                key={i}
+                className="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-border/60 hover:before:bg-primary/50 transition-colors"
+              >
                 <div className="absolute left-[-4px] top-2 h-2 w-2 rounded-full bg-primary ring-4 ring-background" />
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-3 gap-2">
                   <h3 className="text-xl font-bold">{exp.title}</h3>
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground bg-muted/50 border border-border/40 px-3 py-1 rounded-full">{exp.period}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground bg-muted/50 border border-border/40 px-3 py-1 rounded-full">
+                    {exp.period}
+                  </span>
                 </div>
                 <p className="text-primary font-semibold mb-4">{exp.company}</p>
-                <p className="text-muted-foreground leading-relaxed max-w-2xl">{exp.description}</p>
+                <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                  {exp.description}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Education */}
-        <section className="animate-fade-slide-up" style={{ animationDelay: "400ms" }}>
+        <section
+          className="animate-fade-slide-up"
+          style={{ animationDelay: "400ms" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
               <GraduationCap className="h-6 w-6" />
@@ -114,14 +231,19 @@ export default function ResumePage() {
           </div>
           <div className="grid gap-6">
             {education.map((edu, i) => (
-              <Card key={i} className="border-border/40 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
+              <Card
+                key={i}
+                className="border-border/40 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300"
+              >
                 <CardContent className="p-8">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                       <h3 className="text-xl font-bold mb-1">{edu.degree}</h3>
                       <p className="text-primary font-medium">{edu.school}</p>
                     </div>
-                    <span className="text-sm font-bold text-muted-foreground bg-muted/50 px-4 py-1.5 rounded-full">{edu.period}</span>
+                    <span className="text-sm font-bold text-muted-foreground bg-muted/50 px-4 py-1.5 rounded-full">
+                      {edu.period}
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -130,20 +252,33 @@ export default function ResumePage() {
         </section>
 
         {/* Skills */}
-        <section className="animate-fade-slide-up" style={{ animationDelay: "500ms" }}>
+        <section
+          className="animate-fade-slide-up"
+          style={{ animationDelay: "500ms" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
               <Code2 className="h-6 w-6" />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Technical Skills</h2>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Technical Skills
+            </h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
             {skills.map((skillGroup, i) => (
-              <div key={i} className="space-y-6 p-6 rounded-2xl bg-muted/30 border border-border/40">
-                <h3 className="font-bold text-primary uppercase text-xs tracking-widest">{skillGroup.category}</h3>
+              <div
+                key={i}
+                className="space-y-6 p-6 rounded-2xl bg-muted/30 border border-border/40"
+              >
+                <h3 className="font-bold text-primary uppercase text-xs tracking-widest">
+                  {skillGroup.category}
+                </h3>
                 <div className="flex flex-wrap gap-2.5">
                   {skillGroup.items.map((skill, j) => (
-                    <span key={j} className="text-xs font-medium px-3.5 py-1.5 rounded-lg bg-background border border-border/40 shadow-sm hover:border-primary/40 hover:scale-105 transition-all">
+                    <span
+                      key={j}
+                      className="text-xs font-medium px-3.5 py-1.5 rounded-lg bg-background border border-border/40 shadow-sm hover:border-primary/40 hover:scale-105 transition-all"
+                    >
                       {skill}
                     </span>
                   ))}
@@ -153,13 +288,53 @@ export default function ResumePage() {
           </div>
         </section>
 
+        {/* Projects */}
+        <section
+          className="animate-fade-slide-up"
+          style={{ animationDelay: "550ms" }}
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+              <Briefcase className="h-6 w-6" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Featured Projects
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {projects.map((project, i) => (
+              <Card
+                key={i}
+                className="border-border/40 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group"
+              >
+                <CardContent className="p-8">
+                  <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                    {project.tech}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {project.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         {/* Certifications */}
-        <section className="animate-fade-slide-up" style={{ animationDelay: "600ms" }}>
+        <section
+          className="animate-fade-slide-up"
+          style={{ animationDelay: "600ms" }}
+        >
           <div className="flex items-center gap-3 mb-8">
             <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
               <Award className="h-6 w-6" />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Certifications</h2>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Certifications
+            </h2>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
@@ -167,20 +342,35 @@ export default function ResumePage() {
               "PicoCTF-Afrrica 2025 Certificate of Achievement",
               "Wavumbuzi Entrepreneurship Certificate",
               "AI Fundamentals certificate",
-              "Data Literacy certificate"
+              "Data Literacy certificate",
             ].map((cert, i) => (
-              <div key={i} className="flex items-center gap-3 p-4 rounded-xl border border-border/40 bg-card/30">
+              <div
+                key={i}
+                className="flex items-center gap-3 p-4 rounded-xl border border-border/40 bg-card/30"
+              >
                 <div className="h-2 w-2 rounded-full bg-primary" />
-                <span className="text-sm font-medium text-muted-foreground">{cert}</span>
+                <span className="text-sm font-medium text-muted-foreground">
+                  {cert}
+                </span>
               </div>
             ))}
           </div>
         </section>
       </div>
 
-      <div className="mt-24 text-center animate-fade-slide-up" style={{ animationDelay: "700ms" }}>
-        <p className="text-muted-foreground mb-6">Interested in working together?</p>
-        <Button variant="outline" asChild size="lg" className="rounded-full group px-8 h-14 border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300">
+      <div
+        className="mt-24 text-center animate-fade-slide-up"
+        style={{ animationDelay: "700ms" }}
+      >
+        <p className="text-muted-foreground mb-6">
+          Interested in working together?
+        </p>
+        <Button
+          variant="outline"
+          asChild
+          size="lg"
+          className="rounded-full group px-8 h-14 border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300"
+        >
           <Link href="/#contact">
             Let&apos;s start a conversation
             <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
