@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { PrintButton } from "@/components/PrintButton";
+import {DownloadButton} from "@/components/DownloadButton";
 
 const education = [
   {
@@ -181,7 +181,7 @@ export default function ResumePage() {
             </div>
           </div>
         </div>
-        <PrintButton />
+        <DownloadButton />
       </div>
 
       <div className="grid gap-16">
