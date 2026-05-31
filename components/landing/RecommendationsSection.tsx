@@ -84,7 +84,7 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
               className={`flex gap-6 w-max ${recVisible ? "animate-marquee group-hover:paused" : ""}`}
               style={{ width: "max-content" }}
             >
-              {[...recommendations, ...recommendations].map((rec, i) => (
+              {recommendations.map((rec, i) => (
                 <Card
                   key={`${rec._id}-${i}`}
                   className={`relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] ${recVisible ? "animate-fadeSlideUp" : ""}`}
