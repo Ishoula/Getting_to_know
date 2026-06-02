@@ -25,10 +25,10 @@ export function ProjectCard({
   image,
 }: ProjectCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:border-primary/30 shadow-none">
+    <Card className="flex flex-col h-full overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 shadow-sm">
       <Link href={`/projects/${id}`} className="flex flex-col flex-1">
         {image && (
-          <div className="relative h-48 w-full bg-muted overflow-hidden">
+          <div className="relative h-28 w-full bg-muted overflow-hidden">
             <Image
               src={image}
               alt={title}
@@ -40,7 +40,7 @@ export function ProjectCard({
           </div>
         )}
         <CardHeader className="p-4 md:p-6">
-          <CardTitle className="text-lg md:text-xl transition-colors duration-300 group-hover:text-primary">{title}</CardTitle>
+          <CardTitle className="text-base md:text-lg transition-colors duration-300 group-hover:text-primary">{title}</CardTitle>
           <CardDescription className="text-xs md:text-sm line-clamp-2">{description}</CardDescription>
         </CardHeader>
         <CardContent className="p-4 md:p-6 pt-0 md:pt-0 flex-1">
