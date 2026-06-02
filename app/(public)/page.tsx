@@ -20,7 +20,7 @@ async function getData() {
   try {
     await connectToDatabase();
     const [projects, recommendations] = await Promise.all([
-      Project.find({}).sort({ createdAt: -1 }).limit(3).lean(),
+      Project.find({ liveUrl: { $exists: true, $ne: "" } }).sort({ createdAt: -1 }).lean(),
       Recommendation.find({ approved: true }).sort({ createdAt: -1 }).lean(),
     ]);
 
