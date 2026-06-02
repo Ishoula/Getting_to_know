@@ -26,11 +26,6 @@ export default function TechTree() {
         gl.domElement.addEventListener("webglcontextlost", handleContextLost, false);
       }}
     >
-
-
-
-
-
       <TechTreeContent />
       <Preload all />
     </Canvas>

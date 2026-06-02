@@ -36,7 +36,6 @@ export default function TechCard({
   const cardDepth = size?.depth ?? 0.15;
   const fontSize = size?.fontSize ?? 0.16;
 
-  // 🎯 Theme colors
   const colors = useMemo(() => {
     return {
       card: isDark ? "#ffffff" : "#000000",
