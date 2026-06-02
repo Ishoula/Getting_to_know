@@ -28,7 +28,7 @@ export function ProjectCard({
     <Card className="flex flex-col h-full overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 shadow-sm">
       <Link href={`/projects/${id}`} className="flex flex-col flex-1">
         {image && (
-          <div className="relative h-28 w-full bg-muted overflow-hidden">
+          <div className="relative h-36 sm:h-40 md:h-48 w-full bg-muted overflow-hidden">
             <Image
               src={image}
               alt={title}

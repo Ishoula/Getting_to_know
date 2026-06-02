@@ -67,7 +67,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               {liveProjects.map((project, i) => (
                 <div 
                   key={`${project._id}-${i}`}
-                  className={`flex-shrink-0 h-auto w-[240px] sm:w-[280px] md:w-[320px] ${isVisible ? "animate-fadeSlideUp" : "opacity-0"}`}
+                  className={`flex-shrink-0 h-auto w-[260px] sm:w-[320px] md:w-[380px] ${isVisible ? "animate-fadeSlideUp" : "opacity-0"}`}
                   style={{
                     animationDelay: `${Math.min(i, 8) * 120}ms`,
                   }}
