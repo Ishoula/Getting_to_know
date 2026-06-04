@@ -108,14 +108,6 @@ export function Navbar() {
             </Link>
           ))}
           <div className="h-px w-full bg-border/40 my-2" />
-          <Link
-            href="/login"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground hover:translate-x-2 py-2 flex items-center gap-2"
-          >
-            <ArrowRight className="h-4 w-4" />
-            Admin Login
-          </Link>
         </div>
       </div>
     </header>
