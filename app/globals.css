@@ -246,6 +246,11 @@ html {
   animation: subtle-float 4s ease-in-out infinite;
 }
 
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -291,4 +296,48 @@ html {
   .text-primary {
     color: #0f172a !important;
   }
+  :root {
+  --gold: #d4af37;
+}
+
+@keyframes heroFloat {
+  0%,100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glowPulse {
+  0%,100% {
+    opacity: .5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: .9;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes drift {
+  0%,100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-hero-float {
+  animation: heroFloat 6s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+.animate-drift {
+  animation: drift 7s ease-in-out infinite;
+}
 }
