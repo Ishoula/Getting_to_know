@@ -83,6 +83,8 @@ const skills = [
       "Linux",
       "Docker",
       "Vercel",
+      "Netlify",
+      "Render",
       "Redis",
     ],
   },
