@@ -47,13 +47,13 @@ export function Navbar() {
             </Link>
           ))}
           <div className="h-4 w-px bg-border/60" />
-          <Link
+          {/* <Link
             href="/login"
             className="text-sm font-medium text-muted-foreground transition-all duration-300 hover:text-foreground flex items-center gap-1.5 group"
           >
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             Admin
-          </Link>
+          </Link> */}
           <ThemeToggle />
         </div>
 
