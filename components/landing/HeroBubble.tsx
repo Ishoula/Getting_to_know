@@ -54,7 +54,7 @@ export function HeroBubble() {
       <div className="relative z-20 flex-shrink-0">
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-yellow-500/10 blur-3xl" />
         <Image
-          src="/moi.png"
+          src="/me.png"
           alt="I.Shoula"
           width={320}
           height={500}
