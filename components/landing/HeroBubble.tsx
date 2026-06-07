@@ -23,7 +23,7 @@ function seeded(i: number, scale: number, offset = 0) {
 
 export function HeroBubble() {
   return (
-    <div className="relative min-h-[420px] flex flex-col md:flex-row items-start justify-start pt-6 md:pt-0 overflow-hidden">
+    <div className="relative min-h-[420px] md:min-h-[700px] flex flex-col md:flex-row items-start justify-start pt-6 md:pt-0 overflow-hidden">
 
       {/* Character — md+ only, smaller on md, full on lg */}
       <div className="hidden md:flex flex-col items-center relative z-20 flex-shrink-0">
