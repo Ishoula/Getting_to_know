@@ -97,7 +97,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsProps
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover"
               priority
             />
           </div>

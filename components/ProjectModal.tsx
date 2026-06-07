@@ -54,7 +54,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-background/60"
             onClick={onClose}
           />
 
@@ -87,7 +87,6 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   sizes="(max-width: 768px) 100vw, 672px"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
               </div>
             )}
 
