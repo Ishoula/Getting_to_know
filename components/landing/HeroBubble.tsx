@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 
 const TECHS = [
   "React", "Next.js", "TypeScript", "Node.js", "PostgreSQL",
-  "MongoDB", "Tailwind", "Prisma", "REST", "GraphQL",
-  "Docker", "Git", "Python", "Java", "Spring Boot",
-  "SQLite", "Redis", "JWT", "React Native", "Figma",
-  "Linux", "Vercel", "AWS", "C++", "Framer",
+  "MongoDB", "Tailwind", "Prisma", "REST", "Express",
+  "Git", "Python", "Java", "Spring Boot",
+  "Render", "Redis", "JWT", "React Native", "Figma",
+  "Linux", "Vercel", "C++", "Framer","Neon","Supabase"
 ];
 
 const FALL_DURATION = 4;
