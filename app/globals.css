@@ -134,6 +134,18 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide scrollbar — webkit browsers */
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    display: none;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+  }
 }
 
 /* Custom Animations */

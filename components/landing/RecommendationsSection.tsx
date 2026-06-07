@@ -81,16 +81,14 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
 
           <div className="overflow-hidden">
             <div
-              className={`flex gap-6 w-max ${recVisible ? "animate-marquee group-hover:paused" : ""}`}
+              className={`flex gap-6 ${recVisible ? "animate-marquee group-hover:[animation-play-state:paused]" : ""}`}
               style={{ width: "max-content" }}
             >
-              {recommendations.map((rec, i) => (
+              {/* Render twice for seamless infinite loop */}
+              {[...recommendations, ...recommendations].map((rec, i) => (
                 <Card
                   key={`${rec._id}-${i}`}
-                  className={`relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] ${recVisible ? "animate-fadeSlideUp" : ""}`}
-                  style={{
-                    animationDelay: `${Math.min(i, 8) * 120}ms`,
-                  }}
+                  className="relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px]"
                 >
                   {rec.featured && (
                     <div className="absolute top-4 right-4 z-10">
