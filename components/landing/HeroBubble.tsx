@@ -29,7 +29,7 @@ export function HeroBubble() {
       <div className="hidden md:flex flex-col items-center relative z-20 flex-shrink-0">
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-48 h-48 lg:w-64 lg:h-64 rounded-full bg-yellow-500/10 blur-3xl" />
         <Image
-          src="/moi.jpg"
+          src="/moi dark.jpg"
           alt="I.Shoula"
           width={220}
           height={360}

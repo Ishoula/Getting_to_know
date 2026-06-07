@@ -83,9 +83,9 @@ const skills = [
       "Linux",
       "Docker",
       "Vercel",
-      "Netlify",
-      "Render",
       "Redis",
+      "Render",
+      "Netlify"
     ],
   },
   {
@@ -95,7 +95,8 @@ const skills = [
       "Algorithms",
       "Problem Solving",
       "UI/UX Design",
-      "System Design",
+      "System Design LifeCycle",
+      
     ],
   },
 ];
