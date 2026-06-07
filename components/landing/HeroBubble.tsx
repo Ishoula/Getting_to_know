@@ -38,6 +38,7 @@ export function HeroBubble() {
         />
         {/* CTAs below image — md only */}
         <div className="md:flex lg:hidden flex-col items-center gap-3 mt-4 z-10">
+          <span className="tracking-[0.3em] text-xs font-bold text-foreground">I.SHOULA</span>
           <div className="flex flex-wrap justify-center gap-2">
             <Button asChild size="sm">
               <Link href="#projects">
@@ -53,38 +54,36 @@ export function HeroBubble() {
               </a>
             </Button>
           </div>
-          <span className="tracking-[0.3em] text-xs font-bold text-foreground">I.SHOULA</span>
         </div>
       </div>
 
       {/* Bubble + rain wrapper */}
       <div className="relative w-full min-w-0 flex-1 max-w-xl md:max-w-4xl lg:max-w-4xl">
 
-        {/* ── SMALL (< md): rounded rectangle, no image ── */}
-        <div className="md:hidden rounded-3xl border-2 border-foreground/20 bg-[#e8e8e8] dark:bg-[#2a2a2a] px-8 py-10 flex flex-col items-center text-center animate-subtle-float mx-2">
-          <span className="uppercase tracking-[0.35em] text-[10px] font-semibold text-muted-foreground">
-            Full Stack · Mobile Developer
-          </span>
-          <h1 className="mt-3 text-2xl font-black leading-tight text-foreground">
-            Building Systems
-            <br />
-            With Intent.
+        {/* ── SMALL (< md): plain text hero, no bubble ── */}
+        <div className="md:hidden flex flex-col px-2 pt-4 pb-6">
+          <p className="text-muted-foreground text-sm mb-2">Call Me</p>
+          <h1 className="text-4xl font-black tracking-tight text-foreground mb-4">
+            I.Shoula
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            From UI to infrastructure, every detail serves a purpose.
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-sm">
+            I build full-stack systems that feel alive — fast, scalable, and intentional from UI to infrastructure.
           </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button asChild size="sm">
-              <Link href="#projects">View Work <ArrowRight className="ml-1 h-3 w-3" /></Link>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link href="#projects">
+                See My Work <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link href="#contact">Contact</Link>
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="#contact">{"Let's Talk"}</Link>
             </Button>
-            <Button variant="secondary" size="sm" asChild>
-              <a href="#quickie">Quickie <Star className="ml-1 h-3 w-3" /></a>
+            <Button variant="secondary" size="lg" asChild>
+              <a href="#quickie">
+                Quickie <Star className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
-          <span className="mt-5 tracking-[0.35em] text-sm font-bold text-foreground">I.SHOULA</span>
         </div>
 
         {/* ── MD+: cloud SVG — scaled down on md, full on lg ── */}
@@ -159,9 +158,9 @@ export function HeroBubble() {
           </div>
         </div>
 
-        {/* Tech rain */}
+        {/* Tech rain — md+ only, falls from bubble bottom */}
         <div
-          className="absolute left-[10%] right-[10%] top-[72%] h-[280px] overflow-hidden pointer-events-none z-0"
+          className="hidden md:block absolute left-[10%] right-[10%] top-[72%] h-[280px] overflow-hidden pointer-events-none z-0"
           aria-hidden="true"
         >
           {TECHS.map((tech, i) => {
