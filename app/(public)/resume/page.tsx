@@ -51,6 +51,7 @@ const skills = [
       "Tailwind CSS",
       "Expo Router",
       "shadcn/ui",
+      "HTML5"
     ],
   },
   {

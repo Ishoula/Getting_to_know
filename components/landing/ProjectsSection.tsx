@@ -25,7 +25,9 @@ interface ProjectsSectionProps {
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [current, setCurrent] = useState(0);
-  const [modalProject, setModalProject] = useState<ProjectModalData | null>(null);
+  const [modalProject, setModalProject] = useState<ProjectModalData | null>(
+    null,
+  );
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +44,11 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
     if (!track) return;
     const card = track.children[index] as HTMLElement;
     if (!card) return;
-    card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
     setCurrent(index);
   }, []);
 
@@ -76,18 +82,24 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-16 border-t border-border/40">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="py-8 border-t border-border/40"
+    >
       {/* Header */}
       <div className="flex items-end justify-between mb-10">
         <div className="max-w-xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured Projects</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">
+            Featured Projects
+          </h2>
           <p className="text-muted-foreground">Highlights of my recent work.</p>
         </div>
         <Link
@@ -111,7 +123,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               "w-10 h-10 rounded-full bg-card border border-border shadow-md",
               "flex items-center justify-center transition-all duration-200",
               "hover:scale-110 hover:shadow-lg active:scale-95",
-              !canPrev && "opacity-30 pointer-events-none"
+              !canPrev && "opacity-30 pointer-events-none",
             )}
           >
             <ChevronLeft className="h-5 w-5" />
@@ -127,7 +139,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               "w-10 h-10 rounded-full bg-card border border-border shadow-md",
               "flex items-center justify-center transition-all duration-200",
               "hover:scale-110 hover:shadow-lg active:scale-95",
-              !canNext && "opacity-30 pointer-events-none"
+              !canNext && "opacity-30 pointer-events-none",
             )}
           >
             <ChevronRight className="h-5 w-5" />
@@ -149,7 +161,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 className={cn(
                   "flex-shrink-0 snap-start",
                   "w-[80vw] sm:w-[340px] md:w-[380px]",
-                  isVisible ? "animate-fade-in-up" : "opacity-0"
+                  isVisible ? "animate-fade-in-up" : "opacity-0",
                 )}
                 style={{ animationDelay: `${Math.min(i, 5) * 100}ms` }}
               >
@@ -161,15 +173,17 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                   githubUrl={project.githubUrl}
                   liveUrl={project.liveUrl}
                   image={project.image}
-                  onOpen={() => setModalProject({
-                    id: project._id,
-                    title: project.title,
-                    description: project.description,
-                    techStack: project.techStack,
-                    githubUrl: project.githubUrl,
-                    liveUrl: project.liveUrl,
-                    image: project.image,
-                  })}
+                  onOpen={() =>
+                    setModalProject({
+                      id: project._id,
+                      title: project.title,
+                      description: project.description,
+                      techStack: project.techStack,
+                      githubUrl: project.githubUrl,
+                      liveUrl: project.liveUrl,
+                      image: project.image,
+                    })
+                  }
                 />
               </div>
             ))}
@@ -186,7 +200,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                   "rounded-full transition-all duration-300",
                   i === current
                     ? "w-4 h-2 bg-foreground"
-                    : "w-2 h-2 bg-foreground/25 hover:bg-foreground/50"
+                    : "w-2 h-2 bg-foreground/25 hover:bg-foreground/50",
                 )}
               />
             ))}
