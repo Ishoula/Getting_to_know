@@ -48,11 +48,6 @@ export function HeroBubble() {
             <Button variant="outline" size="sm" asChild>
               <Link href="#contact">Contact</Link>
             </Button>
-            <Button variant="secondary" size="sm" asChild>
-              <a href="#quickie">
-                Quickie <Star className="ml-1 h-3 w-3" />
-              </a>
-            </Button>
           </div>
         </div>
       </div>
@@ -146,11 +141,7 @@ export function HeroBubble() {
               <Button variant="outline" size="sm" asChild>
                 <Link href="#contact">Contact</Link>
               </Button>
-              <Button variant="secondary" size="sm" asChild>
-                <a href="#quickie">
-                  Quickie <Star className="ml-1 h-3 w-3" />
-                </a>
-              </Button>
+
             </div>
             <span className="hidden lg:block mt-4 tracking-[0.3em] text-xs lg:text-sm font-bold text-foreground">
               I.SHOULA
