@@ -73,11 +73,6 @@ export function HeroBubble() {
             <Button variant="secondary" size="lg" asChild>
               <Link href="#contact">{"Let's Talk"}</Link>
             </Button>
-            <Button variant="secondary" size="lg" asChild>
-              <a href="#quickie">
-                Quickie <Star className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
           </div>
         </div>
 

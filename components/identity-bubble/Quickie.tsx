@@ -358,7 +358,7 @@ export default function Quickie() {
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
         className={cn(
-          "fixed bottom-6 left-6 z-40 p-2.5 rounded-xl bg-card border-2 border-foreground shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.3)] transition-all",
+          "hidden md:block fixed bottom-6 left-6 z-40 p-2.5 rounded-xl bg-card border-2 border-foreground shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,0.3)] transition-all",
           isOpen && "pointer-events-none opacity-0"
         )}
         aria-label="Open Quickie"
