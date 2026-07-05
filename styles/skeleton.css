@@ -1,0 +1,11 @@
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.skeleton {
+  background: var(--skeleton-bg, #e0e0e0);
+  animation: var(--skeleton-shimmer, pulse 1.5s ease-in-out infinite);
+  border-radius: var(--skeleton-radius, 0.25rem);
+}
