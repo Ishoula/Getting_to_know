@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { connectToDatabase } from "@/lib/db";
-import Project from "@/models/Project";
+import useSWR from "swr";
 import { ProjectCard } from "@/components/project-card";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -11,19 +11,14 @@ export const metadata: Metadata = {
   description: "Browse my portfolio of web development projects.",
 };
 
-async function getProjects() {
-  try {
-    await connectToDatabase();
-    const projects = await Project.find({}).sort({ createdAt: -1 }).lean();
-    return JSON.parse(JSON.stringify(projects));
-  } catch (error) {
-    console.error("Error fetching projects:", error);
-    return [];
-  }
-}
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default async function ProjectsPage() {
-  const projects = await getProjects();
+export default function ProjectsPage() {
+  const { data: projects, error } = useSWR<any[]>("/api/projects", fetcher, {
+    fallbackData: [],
+    revalidateOnFocus: false,
+  });
+  const isLoading = !projects && !error;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -35,7 +30,13 @@ export default async function ProjectsPage() {
         </p>
       </div>
 
-      {projects.length > 0 ? (
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <Skeleton key={i} className="h-48 w-full rounded-lg" />
+          ))}
+        </div>
+      ) : projects && projects.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {projects.map((project: {
             _id: string;
