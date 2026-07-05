@@ -91,7 +91,7 @@ export function RecommendationsSection({ initialRecommendations }: { initialReco
                   className="relative overflow-hidden hover:shadow-lg transition-shadow flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px]"
                 >
                   {rec.featured && (
-                    <div className="absolute top-4 right-4 z-10">
+                    <div className="absolute top-4 right-4 z-10 hidden sm:block">
                       <Star className="h-5 w-5 fill-primary text-primary" />
                     </div>
                   )}
