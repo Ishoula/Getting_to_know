@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { CustomCursor } from "@/components/custom-cursor";
 import { SkeletonProvider } from "@/context/SkeletonContext";
-import LoadingHandler from "@/components/ui/LoadingHandler";
 import SkeletonOverlay from "@/components/ui/SkeletonOverlay";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -37,7 +36,6 @@ export default function RootLayout({
     
       <body className="font-sans antialiased bg-background relative isolate">
         <SkeletonProvider>
-          <LoadingHandler />
           <SkeletonOverlay />
           <ThemeProvider
             attribute="class"
