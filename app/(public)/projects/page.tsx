@@ -1,6 +1,7 @@
 import { Metadata } from "next";
+import Quickie from "@/components/identity-bubble/Quickie";
 import { ProjectCard } from "@/components/project-card";
-import {Skeleton} from "@/components/ui/skeleton";
+
 export const metadata: Metadata = {
   title: "Projects",
   description: "Browse my portfolio of web development projects.",
@@ -25,6 +26,10 @@ export default async function ProjectsPage() {
         {projects.map((project: any) => (
           <ProjectCard key={project._id} {...project} />
         ))}
+      </div>
+
+      <div id="quickie" className="hidden lg:block scroll-mt-24">
+        <Quickie />
       </div>
     </div>
   );
