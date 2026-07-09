@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { CustomCursor } from "@/components/custom-cursor";
 import { SkeletonProvider } from "@/context/SkeletonContext";
@@ -43,10 +45,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <CustomCursor />
-            <div className="relative z-10">
-              {children}
-            </div>
+            <SmoothScrollProvider>
+              <CustomCursor />
+              <div className="relative z-10">
+                {children}
+              </div>
+            </SmoothScrollProvider>
           </ThemeProvider>
         </SkeletonProvider>
 
