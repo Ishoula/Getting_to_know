@@ -12,6 +12,10 @@ interface Project {
   _id: string;
   title: string;
   description: string;
+  problemSolved?: string;
+  myRole?: string;
+  keyChallenges?: string[];
+  screenshots?: string[];
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -178,6 +182,10 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                       id: project._id,
                       title: project.title,
                       description: project.description,
+                      problemSolved: project.problemSolved,
+                      myRole: project.myRole,
+                      keyChallenges: project.keyChallenges,
+                      screenshots: project.screenshots,
                       techStack: project.techStack,
                       githubUrl: project.githubUrl,
                       liveUrl: project.liveUrl,

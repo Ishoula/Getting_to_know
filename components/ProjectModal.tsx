@@ -12,6 +12,10 @@ export interface ProjectModalData {
   id: string;
   title: string;
   description: string;
+  problemSolved?: string;
+  myRole?: string;
+  keyChallenges?: string[];
+  screenshots?: string[];
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -65,7 +69,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ type: "spring", damping: 28, stiffness: 320 }}
-            className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-border bg-card shadow-2xl"
+            className="relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-border bg-card shadow-2xl"
           >
             {/* Close button */}
             <button
@@ -76,7 +80,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <X className="h-4 w-4" />
             </button>
 
-            {/* Image */}
+            {/* Main Image */}
             {project.image && (
               <div className="relative w-full aspect-video bg-muted overflow-hidden rounded-t-2xl">
                 <Image
@@ -84,14 +88,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   alt={project.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 672px"
+                  sizes="(max-width: 768px) 100vw, 896px"
                   priority
                 />
               </div>
             )}
 
             {/* Content */}
-            <div className="p-6 space-y-5">
+            <div className="p-6 space-y-6">
               <div>
                 <h2 className="text-2xl font-bold text-foreground">{project.title}</h2>
               </div>
@@ -105,10 +109,68 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 ))}
               </div>
 
+              {/* Problem Solved */}
+              {project.problemSolved && (
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">Problem Solved</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.problemSolved}
+                  </p>
+                </div>
+              )}
+
+              {/* My Role */}
+              {project.myRole && (
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">My Role</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.myRole}
+                  </p>
+                </div>
+              )}
+
+              {/* Key Challenges */}
+              {project.keyChallenges && project.keyChallenges.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">Key Challenges</h3>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                    {project.keyChallenges.map((challenge, index) => (
+                      <li key={index}>{challenge}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Screenshots */}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold text-foreground mb-3">Screenshots</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {project.screenshots.map((screenshot, index) => (
+                      <div
+                        key={index}
+                        className="relative aspect-video bg-muted rounded-lg overflow-hidden"
+                      >
+                        <Image
+                          src={screenshot}
+                          alt={`${project.title} screenshot ${index + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 50vw, 224px"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Description */}
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                {project.description}
-              </p>
+              <div>
+                <h3 className="text-sm font-semibold text-foreground mb-2">Overview</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                  {project.description}
+                </p>
+              </div>
 
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-3 pt-2">

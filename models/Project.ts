@@ -3,6 +3,10 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export interface IProject extends Document {
   title: string;
   description: string;
+  problemSolved?: string;
+  myRole?: string;
+  keyChallenges?: string[];
+  screenshots?: string[];
   techStack: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -25,6 +29,24 @@ const ProjectSchema = new Schema<IProject>(
       required: [true, "Description is required"],
       trim: true,
       maxlength: [1000, "Description cannot exceed 1000 characters"],
+    },
+    problemSolved: {
+      type: String,
+      trim: true,
+      maxlength: [500, "Problem solved cannot exceed 500 characters"],
+    },
+    myRole: {
+      type: String,
+      trim: true,
+      maxlength: [200, "Role cannot exceed 200 characters"],
+    },
+    keyChallenges: {
+      type: [String],
+      default: [],
+    },
+    screenshots: {
+      type: [String],
+      default: [],
     },
     techStack: {
       type: [String],
