@@ -1,0 +1,32 @@
+[
+  {
+    "title": "DevTrack",
+    "tech": "Next.js, TypeScript, Supabase, PostgreSQL",
+    "description":
+      "A developer productivity platform for tracking coding activity, managing workflows, and monitoring developer progress. Built GitHub integration, analytics dashboards, Kanban task management, and secure authentication using modern web technologies."
+  },
+  {
+    "title": "Mula",
+    "tech": "React Native, Spring Boot, PostgreSQL",
+    "description":
+      "A personal finance application designed to help users manage expenses and understand their spending habits. Developed a mobile experience with secure authentication, expense tracking features, REST APIs, PostgreSQL database design, and scalable backend services."
+  },
+  {
+    "title": "RecipeFlow",
+    "tech": "Next.js, Spring Boot, PostgreSQL",
+    "description":
+      "A full-stack recipe sharing platform with user authentication, recipe management, and media handling. Designed REST APIs, implemented email verification, integrated Cloudinary for image storage, and built responsive user interfaces."
+  },
+  {
+    "title": "Livora",
+    "tech": "React Native, Express.js, PostgreSQL",
+    "description":
+      "A cross-platform real estate application focused on simplifying property discovery and management. Built mobile interfaces, integrated backend APIs, and implemented features including property listings, user profiles, authentication, and communication features."
+  },
+  {
+    "title": "Smart Poultry (PMSyst)",
+    "tech": "React Native, Express.js, MongoDB",
+    "description":
+      "A poultry farm management application that helps monitor farming activities and growth records. Developed mobile interfaces and integrated backend APIs to support efficient farm data management."
+  }
+]

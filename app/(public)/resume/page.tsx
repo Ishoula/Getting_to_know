@@ -13,30 +13,14 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import {DownloadButton} from "@/components/DownloadButton";
-
+import { DownloadButton } from "@/components/DownloadButton";
+import experiences from "@/constants/experience.json";
+import projects from "@/constants/projects.json"
 const education = [
   {
     degree: "Software Programming Embedded Systems and Cyber Security",
     school: "Rwanda Coding Academy",
     period: "2024-Present",
-  },
-];
-
-const experiences = [
-  {
-    title: "Software Engineering Projects",
-    company: "Independent & Academic Experience",
-    period: "2024-Present",
-    description:
-      "Built full-stack web and mobile applications using React.js, Next.js, React Native, Node.js, Express.js, and Spring Boot. Worked with REST APIs, PostgreSQL, MongoDB, authentication systems, and responsive UI/UX design across multiple real-world projects.",
-  },
-  {
-    title: "Backend Developer",
-    company: "RCA Hackathon Competition",
-    period: "2025",
-    description:
-      "Worked as a backend developer using Express.js to design and integrate RESTful APIs under hackathon time constraints. Collaborated with frontend developers to ensure smooth data flow, authentication, and feature integration.",
   },
 ];
 
@@ -68,7 +52,9 @@ const skills = [
   },
   {
     category: "Databases",
-    items: ["PostgreSQL", "MongoDB", "MySQL", "Neon", "SQLite"],
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Neon", "SQLite",
+      "Redis", "Supabase"
+    ],
   },
   {
     category: "Languages",
@@ -97,43 +83,11 @@ const skills = [
       "Problem Solving",
       "UI/UX Design",
       "System Design LifeCycle",
-      
+
     ],
   },
 ];
 
-const projects = [
-  {
-    title: "DevTrack",
-    tech: "Next.js, TypeScript, Supabase, PostgreSQL",
-    description:
-      "Developer productivity platform with GitHub tracking, Kanban management, analytics dashboards, and protected authentication flows.",
-  },
-  {
-    title: "Livora",
-    tech: "React Native, Express.js, PostgreSQL",
-    description:
-      "Cross-platform real estate application featuring property listings, messaging, authentication, and user profile management.",
-  },
-  {
-    title: "Smart Poultry App (PMSyst)",
-    tech: "React Native, Express.js, MongoDB",
-    description:
-      "Worked as a Mobile Developer building interfaces and integrating APIs for poultry farm management and growth tracking.",
-  },
-  {
-    title: "Mula",
-    tech: "React Native, Express.js, PostgreSQL",
-    description:
-      "Expense tracking application with Clerk authentication, PostgreSQL database integration, and Redis API rate limiting.",
-  },
-  {
-    title: "RecipeFlow",
-    tech: "React.js, Spring Boot, MySQL",
-    description:
-      "Recipe sharing platform with CRUD functionality, Cloudinary image management, and responsive UI design.",
-  },
-];
 
 export default function ResumePage() {
   return (

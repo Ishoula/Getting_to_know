@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Full-Stack Developer",
+    "company": "Independent & Academic Projects",
+    "period": "2024 – Present",
+    "description": "Designed and developed web and mobile applications including finance, productivity, and platform-based systems. Built responsive interfaces with React, Next.js, and React Native, developed REST APIs using Spring Boot and Express.js, implemented authentication with JWT, integrated databases, and deployed applications to cloud platforms."
+  },
+  {
+    "title": "Backend Developer",
+    "company": "Rwanda Coding Academy Hackathon",
+    "period": "2025",
+    "description": "Developed backend services for a team project using Express.js. Designed RESTful APIs, managed application logic and data flow, implemented backend features, and collaborated with frontend developers to deliver a working solution within a limited development timeline."
+  },
+  {
+    "title": "Data Analytics Intern",
+    "company": "CodeAlpha",
+    "period": "2025",
+    "description": "Applied Python-based data analysis techniques to clean, process, and explore datasets. Used libraries such as Pandas and Matplotlib to analyze patterns, create visualizations, and communicate insights through analytical reports."
+  },
+  {
+    "title": "Data Analytics Trainee",
+    "company": "SandaiCares",
+    "period": "2025",
+    "description": "Worked with Microsoft Excel to organize, clean, and analyze datasets. Created summaries, charts, and reports using Excel functions, PivotTables, and data visualization techniques to support data-driven insights."
+  }
+]
