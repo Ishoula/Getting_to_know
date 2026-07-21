@@ -31,25 +31,35 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const cardBody = (
     <>
-      {image && (
-        <div className="relative h-36 sm:h-40 md:h-48 w-full bg-muted overflow-hidden">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+            <div className="flex flex-col md:flex-row">
+          {/* Image */}
+          {image && (
+            <div className="relative h-36 sm:h-40 md:h-48 w-full md:w-2/3 bg-muted overflow-hidden">
+              <Image
+                src={image}
+                alt={title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
+          )}
+          {/* Vertical title – only on medium+ screens */}
+          <div className="hidden md:flex items-center justify-center w-full md:w-1/3">
+            <CardTitle className="text-base md:text-lg transform -rotate-90 origin-bottom-left text-primary">
+              {title}
+            </CardTitle>
+          </div>
         </div>
-      )}
-      <CardHeader className="p-4 md:p-6">
-        <CardTitle className="text-base md:text-lg transition-colors duration-300 group-hover:text-primary">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-xs md:text-sm line-clamp-2">
-          {description}
-        </CardDescription>
-      </CardHeader>
+              <CardHeader className="p-4 md:p-6 flex flex-col gap-2">
+          {/* Mobile title */}
+          <h3 className="md:hidden text-base font-semibold text-primary">
+            {title}
+          </h3>
+          <CardDescription className="text-xs md:text-sm line-clamp-2">
+            {description}
+          </CardDescription>
+        </CardHeader>
       <CardContent className="p-4 md:p-6 pt-0 md:pt-0 flex-1">
         <div className="flex flex-wrap gap-1.5 md:gap-2">
           {techStack.map((tech) => (
