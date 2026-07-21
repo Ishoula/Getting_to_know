@@ -66,7 +66,7 @@ function AboutSection() {
             <div className="flex flex-wrap gap-3 mt-6">
               <Link
                 href="/resume"
-                className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-medium text-black-600 dark:text-white-400 hover:underline"
               >
                 Download Resume
                 <ArrowRight className="h-4 w-4" />
