@@ -41,13 +41,12 @@ function AboutSection() {
       <div className="flex flex-col lg:flex-row gap-12 items-start">
         <div className="lg:w-1/3 flex justify-center lg:justify-start">
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl" />
             <Image
               src="/moi dark.jpg"
               alt="I.Shoula - Full Stack Developer"
               width={300}
               height={300}
-              className="relative rounded-full border-4 border-border shadow-xl"
+              className="relative border-4 border-border shadow-xl"
             />
           </div>
         </div>
