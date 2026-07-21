@@ -31,36 +31,33 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const cardBody = (
     <>
-            <div className="flex flex-col md:flex-row">
-          {/* Image */}
+      <div className="flex flex-row items-stretch h-40 sm:h-44 md:h-48 border-b">
+        {/* Image */}
+        <div className="relative flex-1 bg-muted overflow-hidden h-full">
           {image && (
-            <div className="relative h-36 sm:h-40 md:h-48 w-full md:w-2/3 bg-muted overflow-hidden">
-              <Image
-                src={image}
-                alt={title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            </div>
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover transition-transform duration-500 hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           )}
-          {/* Vertical title – only on medium+ screens */}
-          <div className="hidden md:flex items-center justify-center w-full md:w-1/3">
-            <CardTitle className="text-base md:text-lg transform -rotate-90 origin-bottom-left text-primary">
-              {title}
-            </CardTitle>
-          </div>
         </div>
-              <CardHeader className="p-4 md:p-6 flex flex-col gap-2">
-          {/* Mobile title */}
-          <h3 className="md:hidden text-base font-semibold text-primary">
+        
+        {/* Vertical title */}
+        <div className="flex items-center justify-center w-12 sm:w-16 md:w-20 bg-primary/5 h-full border-l">
+          <CardTitle className="text-sm sm:text-base md:text-lg transform -rotate-90 text-primary whitespace-nowrap tracking-wider">
             {title}
-          </h3>
-          <CardDescription className="text-xs md:text-sm line-clamp-2">
-            {description}
-          </CardDescription>
-        </CardHeader>
-      <CardContent className="p-4 md:p-6 pt-0 md:pt-0 flex-1">
+          </CardTitle>
+        </div>
+      </div>
+      <CardHeader className="p-4 md:p-5 flex flex-col gap-2">
+        <CardDescription className="text-xs md:text-sm line-clamp-3">
+          {description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="p-4 md:p-5 pt-0 md:pt-0 flex-1">
         <div className="flex flex-wrap gap-1.5 md:gap-2">
           {techStack.map((tech) => (
             <Badge
@@ -77,7 +74,7 @@ export function ProjectCard({
   );
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 shadow-sm">
+    <Card className="flex flex-col h-full overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 shadow-sm bg-card/50 backdrop-blur-sm">
       {onOpen ? (
         <button
           onClick={onOpen}
@@ -92,7 +89,7 @@ export function ProjectCard({
         </Link>
       )}
 
-      <CardFooter className="p-4 md:p-6 pt-0 md:pt-0 gap-2">
+      <CardFooter className="p-4 md:p-5 pt-0 md:pt-0 gap-2 mt-auto">
         {githubUrl && (
           <Button
             variant="outline"
