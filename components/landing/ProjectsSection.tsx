@@ -213,27 +213,31 @@ function ProjectPoster({
           </div>
 
           <div className="absolute inset-0 z-10 flex items-center justify-center px-8 pb-12 pt-20">
-            {project.image ? (
-              <div className="relative h-[250px] w-full max-w-3xl drop-shadow-2xl md:h-[390px]">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                  sizes="(max-width: 768px) 90vw, 960px"
-                  priority={false}
-                />
-              </div>
-            ) : (
-              <div className="flex h-56 w-56 items-center justify-center rounded-full border border-border bg-background/70 text-6xl font-black uppercase text-foreground/20 md:h-72 md:w-72">
-                {project.title.slice(0, 2)}
-              </div>
-            )}
+            <div className="flex items-center justify-center gap-8">
+              <h3
+                className="text-[clamp(2rem,6vw,5rem)] font-black uppercase leading-none tracking-tight text-foreground flex-shrink-0"
+                style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
+              >
+                {project.title}
+              </h3>
+              {project.image ? (
+                <div className="relative h-[250px] w-[600px] max-w-[60vw] flex-shrink-0 drop-shadow-2xl md:h-[390px] md:w-[800px] md:max-w-[65vw]">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 60vw, 65vw"
+                    priority={false}
+                  />
+                </div>
+              ) : (
+                <div className="flex h-56 w-56 items-center justify-center rounded-full border border-border bg-background/70 text-6xl font-black uppercase text-foreground/20 md:h-72 md:w-72">
+                  {project.title.slice(0, 2)}
+                </div>
+              )}
+            </div>
           </div>
-
-          <h3 className="absolute inset-x-0 top-1/2 z-20 -translate-y-1/2 overflow-hidden px-4 text-center text-[clamp(3rem,13vw,9rem)] font-black uppercase leading-none tracking-normal text-foreground/90 mix-blend-difference md:px-8">
-            {project.title}
-          </h3>
         </div>
       </button>
 

@@ -44,16 +44,17 @@ export function ProjectCard({
             />
           )}
         </div>
-        
+
         {/* Vertical title */}
-        <div className="flex items-center justify-center w-12 sm:w-16 md:w-20 bg-primary/5 h-full border-l">
-          <CardTitle className="text-sm sm:text-base md:text-lg text-primary tracking-wider"
-          style={{
-            writingMode:"vertical-rl",
-            textOrientation:"mixed"
-          }}>
+        <div className="flex items-center justify-center w-12 sm:w-16 md:w-20 bg-primary/5 border-l">
+          <CardTitle
+            className="text-sm sm:text-base md:text-lg text-primary tracking-wider"
+            style={{
+              writingMode: "vertical-rl",
+              textOrientation: "mixed",
+            }}
+          >
             {title}
-          
           </CardTitle>
         </div>
       </div>
